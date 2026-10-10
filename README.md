@@ -88,7 +88,7 @@ src/
 │   ├── feedFilters.ts            # FeedFilters, DatePreset (what the UI applies)
 │   ├── preferences.ts            # FeedPreferences, FollowedAuthor
 │   └── brand.ts                  # Brand<T, Name> helper for nominal types
-├── utils/                        # date.ts (validating constructors), format.ts, cx.ts
+├── utils/                        # date.ts, format.ts, storage.ts (safe JSON storage), guards.ts, cx.ts
 ├── config/env.ts                 # Build-time flags
 ├── styles/                       # tokens.css (design tokens), global.css (base, focus, reduced motion)
 ├── components/                   # Generic UI, no domain knowledge: Button, IconButton, Chip,
@@ -98,8 +98,10 @@ src/
 │   ├── filters/                  #   FilterSidebar | FilterSheet (drafts until Apply), chips, empty states
 │   ├── preferences/              #   "Your feed": provider, pure update functions, sections
 │   └── sources/                  #   Labels and coverage rules derived from the data layer
-├── layout/                       # AppLayout (owns applied filters), AppHeader (per breakpoint)
+├── layout/                       # AppLayout (reads filters from the URL), AppHeader (per breakpoint)
 ├── pages/                        # FeedPage (/), PreferencesPage (/preferences)
+├── routes.tsx · AppProviders.tsx # Route table and app-wide providers (shared with tests)
+├── test/                         # Test setup (jsdom stand-ins), render helpers
 ├── queries/                      # React data access (TanStack Query); the only React-aware data code
 │   ├── queryClient.ts            # Cache policy: 2 min fresh, 5 min kept, 1 retry for transient errors
 │   ├── articleQueryKeys.ts       # Cache key factory
@@ -130,7 +132,18 @@ src/
 
 **UI:** built from the Claude Design spec (light theme, Roboto). Breakpoints: phone < 640px (row cards, bottom sheet), tablet 640–1023px (two-column stack cards, side sheet), desktop ≥ 1024px (sticky filter column). Card layout switches with CSS; the header and filter panel switch structure via `useBreakpoint`. Sheets use the native `<dialog>` (focus trap, Esc, focus return), and radios/checkboxes are native inputs.
 
-**State (UI phase):** preferences and applied filters live in memory until they move to localStorage and the URL; with `ENABLE_MOCK_DATA=true` the feed runs on the mock providers.
+**Where state lives:**
+
+| State                                                   | Where                                                             | Why                                       |
+| ------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------- |
+| Keyword and filters                                     | URL (`/?q=climate&date=week&cat=science,technology&src=guardian`) | Shareable; Back steps through each change |
+| Followed sources, categories, authors; dismissed prompt | `localStorage` (validated on read, synced across tabs)            | "Saved on this device"                    |
+| Dismissed failure notices                               | `sessionStorage`                                                  | Hidden for the session only               |
+| Articles                                                | TanStack Query cache                                              | 2 min fresh, 5 min kept                   |
+
+URL and storage values are untrusted input: unknown values are dropped, never thrown on. All filters combine with AND, including the "For you" feed (sources, categories and authors).
+
+**Infinite feed:** an `IntersectionObserver` sentinel 800px before the end of the list requests the next page from every provider that still has results.
 
 **Data flow:** `articleService` → each relevant `NewsSource` → client fetches raw JSON → normalizer turns it into `Article`s independently per provider → the service merges, de-duplicates, re-applies filters and sorts. The UI only sees `Article` and `SearchResult`. If one provider fails (rate limit, outage), the others still return results and the failure is reported in `errors`.
 
@@ -144,11 +157,23 @@ src/
 
 ## Scripts
 
-| Script           | Purpose                       |
-| ---------------- | ----------------------------- |
-| `pnpm dev`       | Dev server on :3000           |
-| `pnpm build`     | Type-check + production build |
-| `pnpm lint`      | Lint with oxlint              |
-| `pnpm format`    | Format with Prettier          |
-| `pnpm typecheck` | Type-check only               |
-| `pnpm test`      | Run unit tests (Vitest)       |
+| Script               | Purpose                                    |
+| -------------------- | ------------------------------------------ |
+| `pnpm dev`           | Dev server on :3000                        |
+| `pnpm build`         | Type-check + production build              |
+| `pnpm lint`          | Lint with oxlint                           |
+| `pnpm format`        | Format with Prettier                       |
+| `pnpm typecheck`     | Type-check only                            |
+| `pnpm test`          | Run all tests once (Vitest)                |
+| `pnpm test:watch`    | Tests in watch mode                        |
+| `pnpm test:coverage` | Tests with a coverage report (`coverage/`) |
+
+## Testing
+
+[Vitest](https://vitest.dev) (Jest-compatible API, runs on Vite's config) with [Testing Library](https://testing-library.com) and jsdom.
+
+- **Unit tests** cover pure logic: normalizers, the article service, query normalization, URL filter parsing, storage validation, formatting.
+- **Component tests** cover behaviour: the follow menu (keyboard, undo), filter drafts and Apply, the search field, the retry cool-down, infinite scroll.
+- **Integration tests** (`src/App.test.tsx`) render the whole app through the real data layer. Tests run with `ENABLE_MOCK_DATA=true`, so they use the same mock providers as development; there is no second set of mocks.
+
+Data-layer tests run in Node; component tests opt into jsdom with a `// @vitest-environment jsdom` comment. jsdom lacks `<dialog>` modal methods, `matchMedia` and `IntersectionObserver`; `src/test/setup.ts` provides minimal stand-ins.
