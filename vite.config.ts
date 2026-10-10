@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { fileURLToPath, URL } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig, loadEnv } from "vite";
@@ -42,5 +43,15 @@ export default defineConfig(({ mode }) => {
       },
     },
     preview: { port: 3000, strictPort: true },
+    test: {
+      // Node by default; component tests opt into jsdom with `// @vitest-environment jsdom`.
+      setupFiles: ["src/test/setup.ts"],
+      // Tests run on the same mock providers as `pnpm dev` with mock data: no second mock.
+      env: { ENABLE_MOCK_DATA: "true" },
+      coverage: {
+        include: ["src/**/*.{ts,tsx}"],
+        exclude: ["src/**/*.test.{ts,tsx}", "src/test/**", "src/main.tsx", "src/**/*.d.ts"],
+      },
+    },
   };
 });
