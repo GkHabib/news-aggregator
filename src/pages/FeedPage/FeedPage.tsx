@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router";
-import type { FeedPreferences, SourceId } from "@/types";
+import type { FeedPreferences } from "@/types";
 import { buttonClassName } from "@/components/Button/buttonClassName";
 import { StateMessage } from "@/components/StateMessage/StateMessage";
 import { ArticleFeed } from "@/features/articles/ArticleFeed/ArticleFeed";
@@ -9,6 +8,7 @@ import { FeedError } from "@/features/articles/FeedError/FeedError";
 import { FeedHeading, type FeedMode } from "@/features/articles/FeedHeading/FeedHeading";
 import { PersonalizePrompt } from "@/features/articles/PersonalizePrompt/PersonalizePrompt";
 import { SourceNotices } from "@/features/articles/SourceNotices/SourceNotices";
+import { useDismissedNotices } from "@/features/articles/SourceNotices/useDismissedNotices";
 import { ActiveFilterChips } from "@/features/filters/ActiveFilterChips/ActiveFilterChips";
 import { EmptyResults } from "@/features/filters/EmptyResults/EmptyResults";
 import { isFiltering } from "@/features/filters/feedFilters";
@@ -38,8 +38,7 @@ export function FeedPage() {
   const feed = useArticles(buildFeedQuery(filters, preferences));
   const articles = feed.data?.articles ?? [];
   const errors = feed.data?.errors ?? [];
-  // ponytail: per-session dismissals live in memory; sessionStorage when wired.
-  const [dismissedNotices, setDismissedNotices] = useState<ReadonlySet<SourceId>>(new Set());
+  const [dismissedNotices, dismissNotice] = useDismissedNotices();
 
   const results = isFiltering(filters);
   const mode: FeedMode = results
@@ -68,11 +67,7 @@ export function FeedPage() {
             />
           )}
 
-          <SourceNotices
-            errors={errors}
-            dismissed={dismissedNotices}
-            onDismiss={(id) => setDismissedNotices((current) => new Set(current).add(id))}
-          />
+          <SourceNotices errors={errors} dismissed={dismissedNotices} onDismiss={dismissNotice} />
 
           <ActiveFilterChips
             layout={breakpoint === "phone" ? "scroll" : "wrap"}
@@ -105,7 +100,7 @@ export function FeedPage() {
               isFetchingMore={feed.isFetchingNextPage}
               hasMore={feed.hasNextPage}
               loadMoreFailed={feed.isFetchNextPageError}
-              onRetryLoadMore={() => feed.fetchNextPage()}
+              onLoadMore={() => feed.fetchNextPage()}
             />
           )}
         </main>
