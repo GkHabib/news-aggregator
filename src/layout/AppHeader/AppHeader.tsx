@@ -14,12 +14,33 @@ interface AppHeaderProps {
   isPreferencesPage: boolean;
   keyword: string;
   onSearch: (keyword: string) => void;
-  /** Phone: back button + search field instead of title and icons. */
+  /** Phone: back button + search field instead of the title (keyword search only). */
   phoneSearchMode: boolean;
   onOpenPhoneSearch: () => void;
   onExitPhoneSearch: () => void;
   activeFilterCount: number;
   onOpenFilters: () => void;
+}
+
+/** Phone: icon-only Filters button; a dot shows that filters are applied. */
+function PhoneFiltersButton({
+  activeCount,
+  onClick,
+}: {
+  activeCount: number;
+  onClick: () => void;
+}) {
+  return (
+    <span className={styles.badgeHost}>
+      <IconButton
+        icon="sliders"
+        label={activeCount ? `Filters, ${activeCount} active` : "Filters"}
+        aria-haspopup="dialog"
+        onClick={onClick}
+      />
+      {activeCount > 0 && <span className={styles.dot} aria-hidden="true" />}
+    </span>
+  );
 }
 
 const Brand = () => (
@@ -76,7 +97,13 @@ function PhoneHeader({
   phoneSearchMode,
   onOpenPhoneSearch,
   onExitPhoneSearch,
+  activeFilterCount,
+  onOpenFilters,
 }: AppHeaderProps) {
+  const filtersButton = (
+    <PhoneFiltersButton activeCount={activeFilterCount} onClick={onOpenFilters} />
+  );
+
   if (isPreferencesPage) {
     return (
       <header className={styles.header}>
@@ -104,6 +131,7 @@ function PhoneHeader({
             prominent
             autoFocus={!keyword}
           />
+          {filtersButton}
         </div>
       </header>
     );
@@ -113,7 +141,8 @@ function PhoneHeader({
     <header className={styles.header}>
       <div className={styles.bar}>
         <Brand />
-        <IconButton icon="search" label="Search and filter" onClick={onOpenPhoneSearch} />
+        <IconButton icon="search" label="Search" onClick={onOpenPhoneSearch} />
+        {filtersButton}
         <Link to="/preferences" aria-label="Your feed" className={iconButtonClassName()}>
           <Icon name="user" />
         </Link>

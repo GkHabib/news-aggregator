@@ -8,8 +8,6 @@ export interface FeedLayoutContext {
   applyFilters: ApplyFilters;
   filterSheetOpen: boolean;
   setFilterSheetOpen: (open: boolean) => void;
-  /** Phone only: the header shows the search field instead of the title. */
-  phoneSearchMode: boolean;
 }
 
 export const useFeedLayout = () => useOutletContext<FeedLayoutContext>();

@@ -5,7 +5,6 @@ import { useToast } from "@/components/Toast/toastContext";
 import {
   activeFilterChips,
   emptyFeedFilters,
-  isFiltering,
   type ApplyFilters,
 } from "@/features/filters/feedFilters";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
@@ -40,19 +39,18 @@ export function AppLayout() {
     if (pathname !== "/") navigate("/");
   };
 
-  /** Back from search on phones: clearing everything returns to the feed. */
+  /** Back from search on phones clears the keyword; applied filters stay (as chips). */
   const exitPhoneSearch = () => {
     setPhoneSearchOpen(false);
-    setFilters(emptyFeedFilters);
+    setFilters((current) => ({ ...current, keyword: "" }));
   };
 
-  const phoneSearchMode = phoneSearchOpen || isFiltering(filters);
+  const phoneSearchMode = phoneSearchOpen || Boolean(filters.keyword);
   const context: FeedLayoutContext = {
     filters,
     applyFilters,
     filterSheetOpen,
     setFilterSheetOpen,
-    phoneSearchMode,
   };
 
   return (

@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import type { FeedFilters } from "@/types";
 import { Button } from "@/components/Button/Button";
 import { RemovableChip } from "@/components/Chip/RemovableChip";
@@ -12,8 +11,6 @@ interface ActiveFilterChipsProps {
   /** "scroll": one swipeable line (phone). "wrap": wrapping rows (tablet, desktop). */
   layout: "scroll" | "wrap";
   showClearAll?: boolean;
-  /** Rendered first, e.g. the Filters button on phones. */
-  leading?: ReactNode;
 }
 
 /** Applied filters; removing one applies immediately with an Undo toast. */
@@ -22,15 +19,13 @@ export function ActiveFilterChips({
   onApply,
   layout,
   showClearAll = true,
-  leading,
 }: ActiveFilterChipsProps) {
   const chips = activeFilterChips(filters);
-  if (!chips.length && !leading) return null;
+  if (!chips.length) return null;
 
   const size = layout === "scroll" ? "medium" : "small";
   return (
     <div className={cx(styles.row, styles[layout])}>
-      {leading}
       {chips.map((chip) => (
         <RemovableChip
           key={chip.key}

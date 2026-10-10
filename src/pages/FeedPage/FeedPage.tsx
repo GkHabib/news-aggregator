@@ -11,10 +11,9 @@ import { PersonalizePrompt } from "@/features/articles/PersonalizePrompt/Persona
 import { SourceNotices } from "@/features/articles/SourceNotices/SourceNotices";
 import { ActiveFilterChips } from "@/features/filters/ActiveFilterChips/ActiveFilterChips";
 import { EmptyResults } from "@/features/filters/EmptyResults/EmptyResults";
-import { activeFilterChips, isFiltering } from "@/features/filters/feedFilters";
+import { isFiltering } from "@/features/filters/feedFilters";
 import { FilterSheet } from "@/features/filters/FilterSheet/FilterSheet";
 import { FilterSidebar } from "@/features/filters/FilterSidebar/FilterSidebar";
-import { FiltersButton } from "@/features/filters/FiltersButton/FiltersButton";
 import { hasPreferences } from "@/features/preferences/feedPreferences";
 import { usePreferences } from "@/features/preferences/preferencesContext";
 import { sourceLabel } from "@/features/sources/sourceInfo";
@@ -33,8 +32,7 @@ const preferenceBasis = (preferences: FeedPreferences) => [
 
 /** The feed and its "Results" mode: search is a mode of the feed, not a separate page. */
 export function FeedPage() {
-  const { filters, applyFilters, filterSheetOpen, setFilterSheetOpen, phoneSearchMode } =
-    useFeedLayout();
+  const { filters, applyFilters, filterSheetOpen, setFilterSheetOpen } = useFeedLayout();
   const { preferences, update } = usePreferences();
   const breakpoint = useBreakpoint();
   const feed = useArticles(buildFeedQuery(filters, preferences));
@@ -50,23 +48,11 @@ export function FeedPage() {
       ? { kind: "forYou", basis: preferenceBasis(preferences) }
       : { kind: "top" };
 
-  const openFilters = () => setFilterSheetOpen(true);
   const isEmpty = feed.status === "success" && articles.length === 0;
 
   return (
     <>
       <title>{results ? "Results · News Aggregator" : "News Aggregator"}</title>
-
-      {breakpoint === "phone" && phoneSearchMode && (
-        <ActiveFilterChips
-          layout="scroll"
-          filters={filters}
-          onApply={applyFilters}
-          leading={
-            <FiltersButton activeCount={activeFilterChips(filters).length} onClick={openFilters} />
-          }
-        />
-      )}
 
       <div className={styles.page}>
         {breakpoint === "desktop" && <FilterSidebar applied={filters} onApply={applyFilters} />}
@@ -88,14 +74,13 @@ export function FeedPage() {
             onDismiss={(id) => setDismissedNotices((current) => new Set(current).add(id))}
           />
 
-          {results && breakpoint !== "phone" && (
-            <ActiveFilterChips
-              layout="wrap"
-              filters={filters}
-              onApply={applyFilters}
-              showClearAll={breakpoint === "tablet"}
-            />
-          )}
+          <ActiveFilterChips
+            layout={breakpoint === "phone" ? "scroll" : "wrap"}
+            filters={filters}
+            onApply={applyFilters}
+            // Desktop clears from the sidebar.
+            showClearAll={breakpoint !== "desktop"}
+          />
 
           {feed.status === "error" ? (
             <FeedError onRetry={() => feed.refetch()} />

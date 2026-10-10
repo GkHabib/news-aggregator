@@ -57,6 +57,23 @@
   flex: 0 1 300px;
 }
 
+.badgeHost {
+  position: relative;
+  display: flex;
+}
+
+.dot {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--bg);
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  pointer-events: none;
+}
+
 .iconLink[aria-current="page"] {
   background: var(--text);
   color: var(--surface);

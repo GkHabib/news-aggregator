@@ -13,9 +13,9 @@
   color: var(--muted);
 }
 
-/* Phone results: the heading shrinks to a caption under the filter row. */
+/* Phone results: the heading shrinks to a caption above the filter chips. */
 .results {
-  padding: 0 4px;
+  padding: 16px 4px 0;
 }
 
 .results .title {

@@ -5,10 +5,11 @@
   gap: 8px;
 }
 
-/* Phone: one swipeable line under the search header. */
+/* Phone: one swipeable line, bleeding to the screen edges. */
 .scroll {
   flex-wrap: nowrap;
-  padding: 12px 16px;
+  margin: 0 -16px;
+  padding: 4px 16px;
   overflow-x: auto;
   scrollbar-width: none;
 }
