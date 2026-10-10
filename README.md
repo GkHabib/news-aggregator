@@ -2,6 +2,20 @@
 
 React + TypeScript (Vite) news aggregator UI.
 
+## Environment variables
+
+The app pulls articles from NewsAPI.org, The New York Times and The Guardian, each of which needs a free API key. Copy the example file and fill in your keys:
+
+```bash
+cp .env.example .env
+```
+
+| Variable           | Source                                                                  |
+| ------------------ | ----------------------------------------------------------------------- |
+| `API_KEY_NEWSAPI`  | [NewsAPI.org](https://newsapi.org/register)                             |
+| `API_KEY_NYTIMES`  | [NYT Developer](https://developer.nytimes.com/get-started)              |
+| `API_KEY_GUARDIAN` | [Guardian Open Platform](https://open-platform.theguardian.com/access/) |
+
 ## Run with Docker
 
 ```bash
@@ -46,6 +60,8 @@ corepack enable
 > pnpm 12 rejects packages published less than 24h ago (`minimumReleaseAge`) as supply-chain protection. If an install fails with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`, wait or pin the previous version; don't add exclusions.
 
 ### 3. Install and run
+
+Make sure `.env` exists (see [Environment variables](#environment-variables)), then:
 
 ```bash
 pnpm install
