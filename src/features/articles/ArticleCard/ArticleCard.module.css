@@ -1,0 +1,136 @@
+/* Phone: "row" card (text left, 84px thumbnail right). Tablet+: "stack" card (16:9 image on top). */
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "body image"
+    "meta meta";
+  column-gap: 16px;
+  height: 100%;
+  padding: 18px 18px 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  transition: box-shadow 150ms ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-2);
+}
+
+.image {
+  grid-area: image;
+  width: 84px;
+  height: 84px;
+  margin-top: 32px;
+  border-radius: var(--r-md);
+  background: var(--img);
+  object-fit: cover;
+}
+
+.body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.title {
+  font: var(--text-headline);
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+
+.link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+.card:hover .link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.summary {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.meta {
+  grid-area: meta;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--target);
+  margin-top: 6px;
+  font: var(--text-meta);
+  color: var(--muted);
+}
+
+/* Wraps on its own so the ⋯ button stays pinned right. */
+.info {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  min-width: 0;
+}
+
+.publisher {
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.menu {
+  margin-right: -10px;
+}
+
+@media (min-width: 640px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+  }
+
+  .body {
+    gap: 10px;
+    padding: 18px 20px 0;
+  }
+
+  /* Without an image the summary may run longer so grid rows stay balanced. */
+  .card:not(:has(.image)) .summary {
+    -webkit-line-clamp: 6;
+  }
+
+  .meta {
+    margin-top: auto;
+    padding: 6px 20px 6px;
+  }
+
+  .menu {
+    margin-right: -12px;
+  }
+}
