@@ -1,0 +1,42 @@
+.section {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.title {
+  margin-bottom: 2px;
+  font: var(--text-section);
+  font-size: 18px;
+}
+
+.description {
+  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.header:not(:has(.description)) {
+  margin-bottom: 12px;
+}
+
+/* Desktop: label-and-controls rows. */
+@media (min-width: 1024px) {
+  .section {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 32px;
+    padding: 24px 28px;
+  }
+
+  .title {
+    margin-bottom: 4px;
+    font-size: 19px;
+  }
+
+  .header:not(:has(.description)) {
+    margin-bottom: 0;
+  }
+}

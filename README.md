@@ -85,9 +85,21 @@ src/
 │   ├── author.ts · category.ts · source.ts
 │   ├── date.ts                   # IsoDateTime, CalendarDate (branded strings)
 │   ├── searchResult.ts           # SearchResult, SourceError
+│   ├── feedFilters.ts            # FeedFilters, DatePreset (what the UI applies)
+│   ├── preferences.ts            # FeedPreferences, FollowedAuthor
 │   └── brand.ts                  # Brand<T, Name> helper for nominal types
-├── utils/date.ts                 # Validating constructors for the date types
+├── utils/                        # date.ts (validating constructors), format.ts, cx.ts
 ├── config/env.ts                 # Build-time flags
+├── styles/                       # tokens.css (design tokens), global.css (base, focus, reduced motion)
+├── components/                   # Generic UI, no domain knowledge: Button, IconButton, Chip,
+│                                 #   Checkbox, Radio, SearchField, Sheet (<dialog>), Toast, Notice, …
+├── features/                     # Domain UI, one folder per concern
+│   ├── articles/                 #   ArticleCard (+ FollowMenu), ArticleFeed, FeedHeading, feed states
+│   ├── filters/                  #   FilterSidebar | FilterSheet (drafts until Apply), chips, empty states
+│   ├── preferences/              #   "Your feed": provider, pure update functions, sections
+│   └── sources/                  #   Labels and coverage rules derived from the data layer
+├── layout/                       # AppLayout (owns applied filters), AppHeader (per breakpoint)
+├── pages/                        # FeedPage (/), PreferencesPage (/preferences)
 ├── queries/                      # React data access (TanStack Query); the only React-aware data code
 │   ├── queryClient.ts            # Cache policy: 2 min fresh, 5 min kept, 1 retry for transient errors
 │   ├── articleQueryKeys.ts       # Cache key factory
@@ -115,6 +127,10 @@ src/
         ├── mockFetchJson.ts      # Routes /api/<provider> to its handler
         └── <provider>/           # *.fixtures.ts (raw data) + *.handler.ts (emulates the API's filters)
 ```
+
+**UI:** built from the Claude Design spec (light theme, Roboto). Breakpoints: phone < 640px (row cards, bottom sheet), tablet 640–1023px (two-column stack cards, side sheet), desktop ≥ 1024px (sticky filter column). Card layout switches with CSS; the header and filter panel switch structure via `useBreakpoint`. Sheets use the native `<dialog>` (focus trap, Esc, focus return), and radios/checkboxes are native inputs.
+
+**State (UI phase):** preferences and applied filters live in memory until they move to localStorage and the URL; with `ENABLE_MOCK_DATA=true` the feed runs on the mock providers.
 
 **Data flow:** `articleService` → each relevant `NewsSource` → client fetches raw JSON → normalizer turns it into `Article`s independently per provider → the service merges, de-duplicates, re-applies filters and sorts. The UI only sees `Article` and `SearchResult`. If one provider fails (rate limit, outage), the others still return results and the failure is reported in `errors`.
 

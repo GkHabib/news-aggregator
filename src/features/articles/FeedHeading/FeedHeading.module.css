@@ -1,0 +1,79 @@
+.heading {
+  padding: 20px 4px 0;
+}
+
+.title {
+  margin-bottom: 4px;
+  font: var(--text-title);
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* Phone results: the heading shrinks to a caption under the filter row. */
+.results {
+  padding: 0 4px;
+}
+
+.results .title {
+  margin: 0;
+  font: var(--text-meta);
+  color: var(--muted);
+}
+
+.order {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .heading {
+    padding: 28px 0 20px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .results {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 28px 0 8px;
+  }
+
+  .results .title {
+    font: var(--text-title);
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .order {
+    display: inline;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .phoneOnly {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    padding: 0 0 20px;
+  }
+
+  .title {
+    font: var(--text-display);
+    font-size: 34px;
+    letter-spacing: -0.01em;
+  }
+
+  .results {
+    padding: 0 0 8px;
+  }
+}

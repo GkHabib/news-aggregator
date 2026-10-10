@@ -1,0 +1,26 @@
+.notice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  padding: 12px 6px 12px 14px;
+  border-radius: 14px;
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.icon {
+  display: flex;
+  margin-top: 1px;
+}
+
+.dismiss {
+  margin: -12px 0;
+  color: var(--warn-fg);
+}
+
+.dismiss:hover {
+  background: rgb(106 74 16 / 8%);
+}

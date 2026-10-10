@@ -1,0 +1,38 @@
+.iconButton {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--target);
+  height: var(--target);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text);
+  transition: background-color 120ms ease;
+}
+
+.iconButton:hover,
+.iconButton[aria-expanded="true"] {
+  background: var(--surface-2);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.muted:hover {
+  color: var(--text);
+}
+
+/* Small filled circle, e.g. "Clear search" inside a field. */
+.small {
+  width: 36px;
+  height: 36px;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.small:hover {
+  background: var(--border);
+}

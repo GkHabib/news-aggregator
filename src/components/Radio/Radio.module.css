@@ -1,0 +1,36 @@
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.ring {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+}
+
+.input:checked + .ring {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: inset 0 0 0 4px var(--surface);
+}
+
+.input:focus-visible + .ring {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

@@ -4,5 +4,7 @@ export type { Author } from "@/types/author";
 export type { Brand } from "@/types/brand";
 export { categories, type Category } from "@/types/category";
 export type { CalendarDate, IsoDateTime } from "@/types/date";
+export { datePresets, type DatePreset, type FeedFilters } from "@/types/feedFilters";
+export type { FeedPreferences, FollowedAuthor } from "@/types/preferences";
 export type { SearchResult, SourceError } from "@/types/searchResult";
 export type { SourceId } from "@/types/source";

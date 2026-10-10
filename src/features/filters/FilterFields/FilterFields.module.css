@@ -1,0 +1,89 @@
+.group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.legend {
+  margin: 22px 0 10px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.group:first-child .legend {
+  margin-top: 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sourceLegend {
+  margin-bottom: 4px;
+}
+
+.range {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.dateLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.dateInput {
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.dateInput:focus-visible {
+  border: 2px solid var(--accent);
+  padding: 0 11px;
+  outline: none;
+}
+
+.hint {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Sidebar: tighter rhythm, radios for dates, small chips. */
+.compact .legend {
+  margin: 16px 0 4px;
+  font-size: 13px;
+}
+
+.compact .group:first-child .legend {
+  margin-top: 12px;
+}
+
+.compact .chips {
+  gap: 6px;
+}
+
+.compact .range {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.compact .dateInput {
+  min-height: 40px;
+}

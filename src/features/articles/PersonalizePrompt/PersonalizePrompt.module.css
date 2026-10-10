@@ -1,0 +1,38 @@
+.prompt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 8px;
+  padding: 16px 8px 12px 18px;
+  border-radius: var(--r-lg);
+  background: var(--accent-soft);
+}
+
+.text {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.dismiss {
+  margin-top: -8px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  min-height: var(--target);
+  font: var(--text-ui);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+  .prompt {
+    margin-bottom: 20px;
+  }
+}
