@@ -1,0 +1,108 @@
+/* Phone: bottom sheet at ~94% height. Tablet+: right side sheet, 420px. */
+.sheet {
+  position: fixed;
+  inset: 44px 0 0;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-3);
+}
+
+.sheet[open] {
+  animation: slide-up 220ms ease-out;
+}
+
+.sheet::backdrop {
+  background: var(--scrim);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.handle {
+  width: 36px;
+  height: 4px;
+  margin: 8px auto 0;
+  border-radius: var(--r-pill);
+  background: var(--border-strong);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px 4px 20px;
+}
+
+.title {
+  flex: 1;
+  font: var(--text-section);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 20px 20px;
+}
+
+.footer {
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+@media (min-width: 640px) {
+  .sheet {
+    inset: 12px 12px 12px auto;
+    width: 420px;
+    border-radius: var(--r-xl);
+  }
+
+  .sheet[open] {
+    animation-name: slide-in;
+  }
+
+  .handle {
+    display: none;
+  }
+
+  .header {
+    padding: 14px 12px 6px 28px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .body {
+    padding: 0 28px 20px;
+  }
+
+  .footer {
+    padding: 16px 24px 20px;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+}

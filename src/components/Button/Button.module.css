@@ -1,0 +1,89 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--target);
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--r-pill);
+  font: var(--text-ui);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+}
+
+.button:disabled {
+  opacity: 0.4;
+}
+
+.large {
+  min-height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.small {
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.withIcon {
+  padding-left: 14px;
+}
+
+.block {
+  flex: 1;
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  color: var(--on-accent);
+}
+
+.primary:active:not(:disabled) {
+  background: var(--accent-pressed);
+}
+
+.secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.secondary:active:not(:disabled) {
+  background: var(--border);
+}
+
+/* Selected state of a secondary (e.g. "Your feed" on its own page). */
+.secondary[aria-current="page"] {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--surface);
+}
+
+.text {
+  padding: 0 12px;
+  background: transparent;
+  color: var(--accent);
+}
+
+.text:hover:not(:disabled) {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.text:active:not(:disabled) {
+  background: var(--accent-soft-hover);
+}

@@ -1,0 +1,44 @@
+/* Tints derive from one hue per category: oklch(0.95 0.03 h) fill, oklch(0.42 0.09 h) text. */
+.tag {
+  --hue: 80;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: var(--r-pill);
+  background: oklch(0.95 0.03 var(--hue));
+  color: oklch(0.42 0.09 var(--hue));
+  font: var(--text-tag);
+  letter-spacing: 0.02em;
+}
+
+.tag[data-category="business"] {
+  --hue: 150;
+}
+.tag[data-category="entertainment"] {
+  --hue: 345;
+}
+.tag[data-category="health"] {
+  --hue: 180;
+}
+.tag[data-category="politics"] {
+  --hue: 30;
+}
+.tag[data-category="science"] {
+  --hue: 250;
+}
+.tag[data-category="sports"] {
+  --hue: 65;
+}
+.tag[data-category="technology"] {
+  --hue: 290;
+}
+.tag[data-category="world"] {
+  --hue: 215;
+}
+
+/* General is deliberately neutral. */
+.tag[data-category="general"] {
+  background: oklch(0.94 0.005 80);
+  color: oklch(0.4 0.01 80);
+}

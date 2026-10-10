@@ -1,0 +1,83 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  min-height: var(--target);
+  border-radius: var(--r-pill);
+  font: var(--text-ui);
+  font-weight: 400;
+  white-space: nowrap;
+  transition: background-color 120ms ease;
+}
+
+.small {
+  min-height: 36px;
+  font-size: 14px;
+}
+
+/* Choice chip: category, date preset, source (preferences). */
+.choice {
+  padding: 0 16px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.choice.small {
+  gap: 4px;
+  padding: 0 12px;
+}
+
+.choice:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.choice[aria-pressed="true"],
+.radio:has(:checked) {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--surface);
+}
+
+.radio {
+  position: relative;
+  cursor: pointer;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.radio:has(:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.choice:disabled {
+  opacity: 0.4;
+}
+
+/* Removable chip: an active filter; activating it removes the filter. */
+.removable {
+  padding: 0 10px 0 16px;
+  border: 0;
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.removable.small {
+  padding: 0 10px 0 14px;
+}
+
+.removable:hover {
+  background: var(--accent-soft-hover);
+}
+
+.removable:active {
+  background: var(--accent-soft-pressed);
+}

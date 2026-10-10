@@ -1,0 +1,61 @@
+.form {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: var(--target);
+  padding: 0 4px 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.form:hover {
+  border-color: var(--muted);
+}
+
+/* The 2px focus border replaces the ring here, so keep the box size steady. */
+.form:focus-within {
+  border: 2px solid var(--accent);
+  padding: 0 3px 0 15px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.prominent .input {
+  font-size: 17px;
+}
+
+.input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+/* Hide the browser's own clear button; the spec has its own. */
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.shortcut {
+  margin-right: 4px;
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  line-height: 1.4;
+}
