@@ -1,0 +1,52 @@
+import type { NyTimesDoc } from "@/services/news/api/nyTimes/nyTimes.types";
+import { fixtureImage } from "@/services/news/mock/mockUtils";
+
+export const nyTimesFixtures: readonly NyTimesDoc[] = [
+  {
+    _id: "nyt://article/0001",
+    web_url: "https://example.com/nyt/chip-startups",
+    headline: { main: "Chip Start-Ups Race to Fill the Gap Left by Export Rules" },
+    abstract: "Smaller companies see an opening as big manufacturers adjust.",
+    byline: { original: "By Daniel Park and Ruth Klein" },
+    multimedia: { default: { url: fixtureImage("startup") } },
+    pub_date: "2026-10-09T23:15:12Z",
+    section_name: "Technology",
+    subsection_name: "",
+    source: "The New York Times",
+  },
+  {
+    _id: "nyt://article/0002",
+    web_url: "https://example.com/nyt/senate-hearing",
+    headline: { main: "Senate Hearing Turns Tense Over Election Security" },
+    abstract: "Lawmakers questioned officials for more than five hours.",
+    byline: { original: "By Grace Miller" },
+    multimedia: { default: { url: fixtureImage("senate") } },
+    pub_date: "2026-10-07T16:40:00Z",
+    section_name: "U.S.",
+    subsection_name: "Politics",
+    source: "The New York Times",
+  },
+  {
+    _id: "nyt://article/0003",
+    web_url: "https://example.com/nyt/retail-earnings",
+    headline: { main: "Retailers Brace for a Cautious Holiday Season" },
+    snippet: "Early forecasts point to flat spending.",
+    byline: { original: "By Omar Haddad" },
+    multimedia: {},
+    pub_date: "2026-10-04T11:00:00Z",
+    section_name: "Business",
+    subsection_name: "DealBook",
+    source: "The New York Times",
+  },
+  {
+    _id: "nyt://article/0004",
+    web_url: "https://example.com/nyt/opinion-cities",
+    headline: { main: "Our Cities Need More Trees, Not More Parking" },
+    abstract: "Shade is infrastructure.",
+    byline: { original: null },
+    multimedia: null,
+    pub_date: "2026-10-01T08:00:00Z",
+    section_name: "Opinion",
+    source: "The New York Times",
+  },
+];
