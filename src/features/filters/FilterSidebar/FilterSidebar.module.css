@@ -1,0 +1,36 @@
+.sidebar {
+  position: sticky;
+  top: 24px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 36px;
+}
+
+.title {
+  font: var(--text-section);
+  font-size: 18px;
+}
+
+.pending {
+  margin: 16px 0 8px;
+  font-size: 13px;
+  color: var(--warn-fg);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pending + .actions {
+  margin-top: 0;
+}
