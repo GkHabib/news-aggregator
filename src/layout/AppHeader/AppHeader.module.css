@@ -1,0 +1,96 @@
+.header {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 10px 10px 20px;
+}
+
+/* Phone search mode and "Back to feed": the back button sits at the edge. */
+.backBar {
+  padding: 10px 12px 10px 6px;
+}
+
+.brand {
+  margin-right: auto;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--text);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: var(--target);
+  padding-right: 12px;
+  border-radius: var(--r-pill);
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.backIcon {
+  display: grid;
+  place-items: center;
+  width: var(--target);
+  height: var(--target);
+}
+
+.search {
+  flex: 0 1 300px;
+}
+
+.iconLink[aria-current="page"] {
+  background: var(--text);
+  color: var(--surface);
+}
+
+@media (min-width: 640px) {
+  .bar {
+    gap: 16px;
+    padding: 12px 24px 12px 32px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bar {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    gap: 32px;
+    padding: 12px 32px;
+  }
+
+  .brand {
+    margin-right: 0;
+    font-size: 21px;
+  }
+
+  .search {
+    flex-basis: 460px;
+  }
+
+  .feedLink {
+    margin-left: auto;
+  }
+}
