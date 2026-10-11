@@ -1,0 +1,775 @@
+[
+  {
+    "_id": "nyt://article/b2ee1c5a-7959-5a99-af51-3e93afcce391",
+    "web_url": "https://www.nytimes.com/2026/10/11/opinion/economy-supply-shocks-groceries-gas.html",
+    "headline": {
+      "main": "Why Your Grocery Bill Will Get Worse"
+    },
+    "abstract": "Supply shocks have become endemic to the global economy. Are we ready to face that fact?",
+    "snippet": "Supply shocks have become endemic to the global economy. Are we ready to face that fact?",
+    "byline": {
+      "original": "By Kathleen Kingsbury and Peter R. Orszag"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11kingsbury-orszag-transcript-ckqb/11kingsbury-orszag-transcript-ckqb-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T13:00:08Z",
+    "section_name": "Opinion",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/07a175e7-f74d-59b3-ac7f-ec8a2688d594",
+    "web_url": "https://www.nytimes.com/2026/10/11/dining/come-for-the-big-croutons-stay-for-the-oregano-garlic-chicken.html",
+    "headline": {
+      "main": "Come for the Big Croutons, Stay for the Oregano-Garlic Chicken"
+    },
+    "abstract": "This Christian Reynoso recipe is very Zuni Café-chicken-coded (complimentary).",
+    "snippet": "This Christian Reynoso recipe is very Zuni Café-chicken-coded (complimentary).",
+    "byline": {
+      "original": "By Mia Leimkuhler"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2025/06/06/multimedia/CR-Oregano-Garlic-Chicken-Big-Croutons-Raisins-FWD/CR-Oregano-Garlic-Chicken-Big-Croutons-Raisins-fvhw-articleLarge-v3.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T13:00:05Z",
+    "section_name": "Food",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/b4b20d0b-2f8b-5481-9e4a-4bb40d0c200e",
+    "web_url": "https://www.nytimes.com/2026/10/11/opinion/doctor-ai.html",
+    "headline": {
+      "main": "Examining the Doctor-A.I. Relationship"
+    },
+    "abstract": "Readers respond to “A.I. Has Made Me a Better Physician,” an essay by Dr. Rachael Bedard. Also: Our mental health; a comparison to China.",
+    "snippet": "Readers respond to “A.I. Has Made Me a Better Physician,” an essay by Dr. Rachael Bedard. Also: Our mental health; a comparison to China.",
+    "byline": {
+      "original": ""
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/09/20/opinion/20BedardStill/20BedardStill-articleLarge.png"
+      }
+    },
+    "pub_date": "2026-10-11T13:00:04Z",
+    "section_name": "Opinion",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/34c6189d-2dc5-5ad6-a411-54df557981a7",
+    "web_url": "https://www.nytimes.com/2026/10/11/arts/television/bad-boys-mean-bad-words-when-shane-gillis-hosts-snl.html",
+    "headline": {
+      "main": "Bad Boys Mean Bad Words When Shane Gillis Hosts ‘S.N.L.’"
+    },
+    "abstract": "Colin Jost returned as Pete Hegseth in a “Saturday Night Live” broadcast that was overshadowed by Gillis’s use of an obscene word in a Dr. Seuss sketch.",
+    "snippet": "Colin Jost returned as Pete Hegseth in a “Saturday Night Live” broadcast that was overshadowed by Gillis’s use of an obscene word in a Dr. Seuss sketch.",
+    "byline": {
+      "original": "By Dave Itzkoff"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/arts/11CUL-SNL-PIX1/11CUL-SNL-PIX1-articleLarge.png"
+      }
+    },
+    "pub_date": "2026-10-11T12:59:04Z",
+    "section_name": "Arts",
+    "subsection_name": "Television",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/179b60ab-1567-5144-b370-656dc71deb13",
+    "web_url": "https://www.nytimes.com/2026/10/11/world/europe/pope-leo-lung-surgery.html",
+    "headline": {
+      "main": "Pope Leo Will Have Surgery to Remove Growth on Lung"
+    },
+    "abstract": "A recent medical examination found a small nodule, he announced, adding that doctors would remove it this week.",
+    "snippet": "A recent medical examination found a small nodule, he announced, adding that doctors would remove it this week.",
+    "byline": {
+      "original": "By Elisabetta Povoledo"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11int-pope-lung-wzkc/11int-pope-lung-wzkc-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T12:55:53Z",
+    "section_name": "World",
+    "subsection_name": "Europe",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/7295cf72-b922-558f-9e4f-c723174c4414",
+    "web_url": "https://www.nytimes.com/2026/10/11/world/europe/trump-zelensky-diesel-energy-russia-.html",
+    "headline": {
+      "main": "Trump Told Ukrainians to ‘Get a New President.’ Ukraine Shrugged."
+    },
+    "abstract": "President Trump lashed out at President Volodymyr Zelensky for striking Russian oil refineries. Mr. Zelensky said he‘ll stop — if Russia does too.",
+    "snippet": "President Trump lashed out at President Volodymyr Zelensky for striking Russian oil refineries. Mr. Zelensky said he‘ll stop — if Russia does too.",
+    "byline": {
+      "original": "By Maria Varenikova, Dzvinka Pinchuk and Ivan Nechepurenko"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11int-ukraine-zelensky-qvtm/11int-ukraine-zelensky-qvtm-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T12:11:20Z",
+    "section_name": "World",
+    "subsection_name": "Europe",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/bc700c2f-fdd2-56d1-84ff-783cb10dcf02",
+    "web_url": "https://www.nytimes.com/2026/10/11/world/middleeast/saudi-arabia-options-houthis.html",
+    "headline": {
+      "main": "Saudi Arabia Has Few Options as Houthis Aim at Heart of Its Ambitions"
+    },
+    "abstract": "Three deadly attacks by the Iran-backed Houthis in Yemen on an airport in the Saudi capital underscored the asymmetrical nature of their conflict with the kingdom.",
+    "snippet": "Three deadly attacks by the Iran-backed Houthis in Yemen on an airport in the Saudi capital underscored the asymmetrical nature of their conflict with the kingdom.",
+    "byline": {
+      "original": "By Vivian Nereim"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11int-saudi-assess-bvtm/11int-saudi-assess-bvtm-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T12:08:37Z",
+    "section_name": "World",
+    "subsection_name": "Middle East",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/c1a48fdd-3c7d-5ced-ae26-e4377a5cfabd",
+    "web_url": "https://www.nytimes.com/2026/10/11/briefing/chinese-surveillance.html",
+    "headline": {
+      "main": "The Watchtower"
+    },
+    "abstract": "We take a look at escalating surveillance in China.",
+    "snippet": "We take a look at escalating surveillance in China.",
+    "byline": {
+      "original": "By Andrew Higgins"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11themorning-nl-higgins-03-mfbz/11themorning-nl-higgins-03-mfbz-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T11:34:15Z",
+    "section_name": "Briefing",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/0d2a60ee-3db8-5574-9a4c-bca5f795d617",
+    "web_url": "https://www.nytimes.com/2026/10/11/opinion/cornell-jane-doe-vietnam-my-lai.html",
+    "headline": {
+      "main": "Four Hours and Three Minutes in Ithaca"
+    },
+    "abstract": "On the most traumatic night in a young woman’s life, a good man could not be found.",
+    "snippet": "On the most traumatic night in a young woman’s life, a good man could not be found.",
+    "byline": {
+      "original": "By David French"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/opinion/11french-column1/11french-column1-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T11:00:17Z",
+    "section_name": "Opinion",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/5e023d52-29b2-5f61-a93f-d0318adb1eba",
+    "web_url": "https://www.nytimes.com/2026/10/11/opinion/chris-gallant-campaign-photos.html",
+    "headline": {
+      "main": "The Sex Scandal That Wasn’t"
+    },
+    "abstract": "It’s hard to work up outrage when someone else’s adult exploits wind up in the tabloids.",
+    "snippet": "It’s hard to work up outrage when someone else’s adult exploits wind up in the tabloids.",
+    "byline": {
+      "original": "By Lux Alptraum"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/opinion/11alptraum-image/11alptraum-image-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T11:00:15Z",
+    "section_name": "Opinion",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/742aa262-f438-5fca-a266-43a3c8b24d7c",
+    "web_url": "https://www.nytimes.com/2026/10/11/opinion/ai-books-fiction-black-writers-racism.html",
+    "headline": {
+      "main": "When Black Writers Are Guilty Until Proved Human"
+    },
+    "abstract": "The recent scandals around A.I. in fiction seem less driven by questions of literary merit than by the workings of anti-woke vigilante activists.",
+    "snippet": "The recent scandals around A.I. in fiction seem less driven by questions of literary merit than by the workings of anti-woke vigilante activists.",
+    "byline": {
+      "original": "By Doyle D. Calhoun"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/13/opinion/11Calhoun/11Calhoun-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T11:00:10Z",
+    "section_name": "Opinion",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/5201691e-a211-5cf1-b315-3fe58311279a",
+    "web_url": "https://www.nytimes.com/2026/10/11/opinion/justice-alito-columbus-statue-trenton.html",
+    "headline": {
+      "main": "The Supreme Court Justice and the Columbus Statue"
+    },
+    "abstract": "Justice Alito has a history of nudging the boundaries of judicial rectitude.",
+    "snippet": "Justice Alito has a history of nudging the boundaries of judicial rectitude.",
+    "byline": {
+      "original": "By Peter S. Canellos"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/12/multimedia/11canellos-zqtl/11canellos-zqtl-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T11:00:08Z",
+    "section_name": "Opinion",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/4908017a-4df8-5bb5-847b-4e996fcafd87",
+    "web_url": "https://www.nytimes.com/2026/10/11/opinion/hungary-sanyi-rooster-bekescsaba-mayor.html",
+    "headline": {
+      "main": "The Rooster That Brought a Hungarian Town Together"
+    },
+    "abstract": "A Hungarian town, an escaped rooster and the universal longing for freedom.",
+    "snippet": "A Hungarian town, an escaped rooster and the universal longing for freedom.",
+    "byline": {
+      "original": "By Lotte Salomons"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/05/arts/Sanyi-thumb-primary/Sanyi-thumb-primary-articleLarge.png"
+      }
+    },
+    "pub_date": "2026-10-11T11:00:05Z",
+    "section_name": "Opinion",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/d3cecab7-f006-51e3-8007-e6bae9a9aebb",
+    "web_url": "https://www.nytimes.com/2026/10/11/podcasts/the-daily/celine-dions-triumphant-return-to-the-stage.html",
+    "headline": {
+      "main": "Celine Dion’s Triumphant Return to the Stage"
+    },
+    "abstract": "After a devastating diagnosis, the superstar makes a thrilling comeback.",
+    "snippet": "After a devastating diagnosis, the superstar makes a thrilling comeback.",
+    "byline": {
+      "original": "By Natalie Kitroeff, Elyssa Dudley, Tina Antolini, Wendy Dorr, Rowan Niemisto, Diane Wong, Dan Powell and Marion Lozano"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11daily-sunday-celine-vqlj/11daily-sunday-celine-vqlj-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T10:00:08Z",
+    "section_name": "Podcasts",
+    "subsection_name": "The Daily",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/c755be11-3b0c-5614-b63a-42fe04ee97df",
+    "web_url": "https://www.nytimes.com/2026/10/11/crosswords/connections-companion-1219.html",
+    "headline": {
+      "main": "Connections Companion No. 1,219"
+    },
+    "abstract": "Scroll down for hints and conversation about the puzzle for Monday, Oct. 12, 2026.",
+    "snippet": "Scroll down for hints and conversation about the puzzle for Monday, Oct. 12, 2026.",
+    "byline": {
+      "original": "By New York Times Games"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/crosswords/12connections-art-1317/12connections-art-1317-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T10:00:07Z",
+    "section_name": "Gameplay",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/88136574-7ecd-5f93-960b-415dea5f73e8",
+    "web_url": "https://www.nytimes.com/2026/10/11/crosswords/strands-sidekick-953.html",
+    "headline": {
+      "main": "Strands Sidekick No. 953"
+    },
+    "abstract": "Scroll down for hints and conversation about the puzzle for Monday, Oct. 12, 2026.",
+    "snippet": "Scroll down for hints and conversation about the puzzle for Monday, Oct. 12, 2026.",
+    "byline": {
+      "original": "By New York Times Games"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/crosswords/12strands-art-1140/12strands-art-1140-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T10:00:03Z",
+    "section_name": "Gameplay",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/fe01bc25-1225-5b86-9de7-0c7df5e34c6a",
+    "web_url": "https://www.nytimes.com/2026/10/11/crosswords/wordle-review-1941.html",
+    "headline": {
+      "main": "Wordle Review No. 1,941"
+    },
+    "abstract": "Scroll down for hints and conversation about the puzzle for Monday, Oct. 12, 2026.",
+    "snippet": "Scroll down for hints and conversation about the puzzle for Monday, Oct. 12, 2026.",
+    "byline": {
+      "original": "By New York Times Games"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/crosswords/12wordle-review-art-1941/12wordle-review-art-1941-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T10:00:03Z",
+    "section_name": "Gameplay",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/0d9d01e9-6251-52aa-8e34-ac262dad5aee",
+    "web_url": "https://www.nytimes.com/2026/10/11/us/los-angeles-mayor-policing-election.html",
+    "headline": {
+      "main": "In Unlikely Turn, Law and Order Heats Up L.A. Mayor’s Race"
+    },
+    "abstract": "Two Democratic candidates choose opposite tacks on public safety and policing, seeking to corral undecided voters.",
+    "snippet": "Two Democratic candidates choose opposite tacks on public safety and policing, seeking to corral undecided voters.",
+    "byline": {
+      "original": "By Shawn Hubler"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11nat-lamayors-policing-vckb/11nat-lamayors-policing-vckb-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:01:40Z",
+    "section_name": "U.S.",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/5effd3d2-c47e-5fe3-84ab-19b689977f6b",
+    "web_url": "https://www.nytimes.com/2026/10/11/pageoneplus/corrections-oct-11-2026.html",
+    "headline": {
+      "main": "Corrections: Oct. 11, 2026"
+    },
+    "abstract": "Corrections that appeared in print on Sunday, Oct. 11, 2026.",
+    "snippet": "Corrections that appeared in print on Sunday, Oct. 11, 2026.",
+    "byline": {
+      "original": ""
+    },
+    "multimedia": null,
+    "pub_date": "2026-10-11T09:01:36Z",
+    "section_name": "Corrections",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/3af53641-ff4b-5d8f-9a4b-b3b70a807495",
+    "web_url": "https://www.nytimes.com/2026/10/11/movies/alex-gibney-musk-documentary.html",
+    "headline": {
+      "main": "Alex Gibney on ‘Musk’ and Why a 4-Hour Film Was Necessary"
+    },
+    "abstract": "The documentarian also talks about trying to interview the trillionaire and the roadblocks the film has run into.",
+    "snippet": "The documentarian also talks about trying to interview the trillionaire and the roadblocks the film has run into.",
+    "byline": {
+      "original": "By Nicole Sperling"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11cul-gibney-musk-01-mtbz/11cul-gibney-musk-01-mtbz-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:01:33Z",
+    "section_name": "Movies",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/ae92c0d2-6dfd-5b73-bd48-838fae90a1d2",
+    "web_url": "https://www.nytimes.com/2026/10/11/business/office-lighting-work-advice.html",
+    "headline": {
+      "main": "A Contagious Aversion to Overhead Lights"
+    },
+    "abstract": "Plus: How far to go for a colleague, and now your chance to give someone advice.",
+    "snippet": "Plus: How far to go for a colleague, and now your chance to give someone advice.",
+    "byline": {
+      "original": "By Max Read"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/multimedia/11WorkFriend-mzpt/11WorkFriend-mzpt-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:01:32Z",
+    "section_name": "Business",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/d6986e99-2b97-500c-b3a5-859c8f5b9b31",
+    "web_url": "https://www.nytimes.com/2026/10/11/science/vikings-archaeology-history-sea-king-sorceress.html",
+    "headline": {
+      "main": "Who Were the Vikings? 21 Graves Weave a Tale of Hunters, Nomads and Sorceresses."
+    },
+    "abstract": "“The Sea-King and the Sorceress” examines the lives and deaths of the diverse people who called themselves Vikings.",
+    "snippet": "“The Sea-King and the Sorceress” examines the lives and deaths of the diverse people who called themselves Vikings.",
+    "byline": {
+      "original": "By Franz Lidz"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/11/science/11SCI-CONVERSATION-VIKINGS-stillpromo/11SCI-CONVERSATION-VIKINGS-stillpromo-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:00:34Z",
+    "section_name": "Science",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/9ab81ef8-0bcf-5399-ac8c-66d88c29c70d",
+    "web_url": "https://www.nytimes.com/2026/10/11/business/san-francisco-housing-conversions.html",
+    "headline": {
+      "main": "San Francisco Isn’t Giving Up on Turning More of Its Offices Into Homes"
+    },
+    "abstract": "The city has not completed a single office-to-housing conversion, despite hopes to meet housing demand and inject life into empty downtowns.",
+    "snippet": "The city has not completed a single office-to-housing conversion, despite hopes to meet housing demand and inject life into empty downtowns.",
+    "byline": {
+      "original": "By Joe Gose"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/04/multimedia/04BIZ-SQFT-SANFRANCISCO-1-fhwk/04BIZ-SQFT-SANFRANCISCO-1-fhwk-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:00:15Z",
+    "section_name": "Business",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/694dd63a-9b11-505b-960d-2af7bfe490a6",
+    "web_url": "https://www.nytimes.com/2026/10/10/business/media/trump-justice-department-tv-networks.html",
+    "headline": {
+      "main": "Justice Dept. Is Investigating TV Networks Over Trump Pool Coverage"
+    },
+    "abstract": "Major TV networks were notified on Friday that the department was examining whether they violated antitrust laws when they suspended pool coverage of President Trump.",
+    "snippet": "Major TV networks were notified on Friday that the department was examining whether they violated antitrust laws when they suspended pool coverage of President Trump.",
+    "byline": {
+      "original": "By David McCabe, Michael M. Grynbaum, Benjamin Mullin, Lauren Hirsch and Glenn Thrush"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/10/multimedia/10biz-media-investigation-gpjh/10biz-media-investigation-gpjh-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-10T22:56:32Z",
+    "section_name": "Business",
+    "subsection_name": "Media",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/bbe34440-6efb-5211-94bf-2b5243c38705",
+    "web_url": "https://www.nytimes.com/2026/10/10/science/ketamine-cornell-anesthesia.html",
+    "headline": {
+      "main": "Why Ketamine Immobilizes Some Users"
+    },
+    "abstract": "Potent powders can produce a nearly catatonic state, particularly in those who have not tried the drug before.",
+    "snippet": "Potent powders can produce a nearly catatonic state, particularly in those who have not tried the drug before.",
+    "byline": {
+      "original": "By Andrew Jacobs"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/08/multimedia/08SCI-KETAMINE-cjwm/08SCI-KETAMINE-cjwm-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-10T20:28:28Z",
+    "section_name": "Science",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/baff4cbe-921a-5039-84af-7309a1d2a456",
+    "web_url": "https://www.nytimes.com/2026/10/10/business/dealbook/ai-verification-tax-rework.html",
+    "headline": {
+      "main": "What’s Dragging Down A.I. Efficiency? The ‘Verification Tax.’"
+    },
+    "abstract": "As artificial intelligence automates office tasks, it is also creating a new type of human work.",
+    "snippet": "As artificial intelligence automates office tasks, it is also creating a new type of human work.",
+    "byline": {
+      "original": "By Sarah Kessler"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/10/business/10db-verification-tax/10db-verification-tax-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-10T12:00:03Z",
+    "section_name": "Business",
+    "subsection_name": "DealBook",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/cb5c0e7f-3c91-5948-a18c-7c44f0ef38be",
+    "web_url": "https://www.nytimes.com/2026/10/10/science/mary-tsingou-menzel-dead.html",
+    "headline": {
+      "main": "Mathematician Who Waited 50 Years for Proper Credit for Her Work Has Died"
+    },
+    "abstract": "At the Los Alamos National Laboratory, Mary Tsingou Menzel’s computer programming helped set the stage for chaos theory and other fields.",
+    "snippet": "At the Los Alamos National Laboratory, Mary Tsingou Menzel’s computer programming helped set the stage for chaos theory and other fields.",
+    "byline": {
+      "original": "By Ama Sarpomaa"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/06/multimedia/06obit-menzel-02-chbt/06obit-menzel-02-chbt-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-10T09:00:32Z",
+    "section_name": "Science",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/f54f34da-e944-587e-8d18-6bbc40307f54",
+    "web_url": "https://www.nytimes.com/2026/10/10/science/will-we-ever-understand-dementia.html",
+    "headline": {
+      "main": "Will We Ever Understand Dementia?"
+    },
+    "abstract": "Since the days of Dr. Alzheimer himself, there has been a dream that severe senility might have an explanation — and a cure. The search for both has never been more urgent.",
+    "snippet": "Since the days of Dr. Alzheimer himself, there has been a dream that severe senility might have an explanation — and a cure. The search for both has never been more urgent.",
+    "byline": {
+      "original": "By Robert Kolker"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/05/multimedia/00sci-unknowns-dementia-02-kfvt/00sci-unknowns-dementia-02-kfvt-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-10T09:00:30Z",
+    "section_name": "Science",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/ac13f5a1-b36a-55a7-bb04-1e4d9e57bfbb",
+    "web_url": "https://www.nytimes.com/2026/10/10/science/fallen-leaves.html",
+    "headline": {
+      "main": "How to Cash In on Autumn’s Fallen Leaves"
+    },
+    "abstract": "To homeowners, fallen leaves look like work. To nature, they’re an investment, with tremendous value on the secondary market as invertebrate real estate.",
+    "snippet": "To homeowners, fallen leaves look like work. To nature, they’re an investment, with tremendous value on the secondary market as invertebrate real estate.",
+    "byline": {
+      "original": "By Alan Burdick"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/13/science/06SCI-AlanBurdick-Leaves/06SCI-AlanBurdick-Leaves-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-10T09:00:12Z",
+    "section_name": "Science",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/6d391ff8-3cf4-57ae-ab29-c0c1ac47afd1",
+    "web_url": "https://www.nytimes.com/2026/10/09/technology/anthropic-rogue-ai-agents.html",
+    "headline": {
+      "main": "Anthropic Agents Tried to Fill Out Visa Forms on State Dept. Website"
+    },
+    "abstract": "The Philadelphia Police Department said the agents had also sent in a false homicide tip. The incidents led the White House to call for better disclosure of rogue A.I. behavior.",
+    "snippet": "The Philadelphia Police Department said the agents had also sent in a false homicide tip. The incidents led the White House to call for better disclosure of rogue A.I. behavior.",
+    "byline": {
+      "original": "By Kate Conger, Mike Isaac, Julian E. Barnes and David E. Sanger"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/09/multimedia/09biz-anthropic-zptw/09biz-anthropic-zptw-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-09T23:15:12Z",
+    "section_name": "Technology",
+    "subsection_name": "",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/5bab984a-4981-57b9-98ad-1e223d9126f6",
+    "web_url": "https://www.nytimes.com/2026/10/11/us/politics/white-house-manufactured-narrative-solomon.html",
+    "headline": {
+      "main": "How the White House Manufactured a Narrative About a Trump Aide’s Call Logs"
+    },
+    "abstract": "A release of selected records from the classified documents inquiry is a case study in how omitting context can create political ammunition.",
+    "snippet": "A release of selected records from the classified documents inquiry is a case study in how omitting context can create political ammunition.",
+    "byline": {
+      "original": "By Charlie Savage"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/10/multimedia/00dc-propaganda-01-mzkl/00dc-propaganda-01-mzkl-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:01:26Z",
+    "section_name": "U.S.",
+    "subsection_name": "Politics",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/73595d56-cb67-57f7-95e2-774efca03ac1",
+    "web_url": "https://www.nytimes.com/2026/10/11/world/middleeast/wringing-hope-from-the-rubble-of-gaza.html",
+    "headline": {
+      "main": "Wringing Hope From the Rubble of Gaza"
+    },
+    "abstract": "The cease-fire last October ostensibly brought an end to Israel’s war in Gaza after the Hamas-led attacks on Oct. 7, 2023. A year later, however, Israeli strikes, though less frequent, haven’t stopped.",
+    "snippet": "The cease-fire last October ostensibly brought an end to Israel’s war in Gaza after the Hamas-led attacks on Oct. 7, 2023. A year later, however, Israeli strikes, though less frequent, haven’t stopped.",
+    "byline": {
+      "original": "By Saher Alghorra and Aaron Boxerman"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/09/22/multimedia/22Gaza-ceasefire-anniversary-05-hjvz/22Gaza-ceasefire-anniversary-05-hjvz-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:01:25Z",
+    "section_name": "World",
+    "subsection_name": "Middle East",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/4c4cb8dd-9d2d-5e6e-b835-a11d345f90ca",
+    "web_url": "https://www.nytimes.com/2026/10/11/us/politics/in-the-senate-collins-often-defies-trump-but-rarely-stops-him.html",
+    "headline": {
+      "main": "In the Senate, Collins Often Defies Trump but Rarely Stops Him"
+    },
+    "abstract": "A New York Times analysis of Senator Susan Collins’s voting record shows that she frequently breaks with Republicans but more seldom changes an outcome.",
+    "snippet": "A New York Times analysis of Senator Susan Collins’s voting record shows that she frequently breaks with Republicans but more seldom changes an outcome.",
+    "byline": {
+      "original": "By Michael Gold, Catie Edmondson and Andrea Fuller"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/09/multimedia/00dc-collins-01-mwpv/00dc-collins-01-mwpv-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:00:56Z",
+    "section_name": "U.S.",
+    "subsection_name": "Politics",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/e7786040-3dc3-5ae1-bc91-9228a7a1bfd8",
+    "web_url": "https://www.nytimes.com/2026/10/11/us/politics/elections-political-violence-harassment.html",
+    "headline": {
+      "main": "America’s Elected Officials Are Living in Fear"
+    },
+    "abstract": "A Times investigation has found that violent threats have become a new normal among public officials, reshaped private lives, cost millions in security and pushed people out of office.",
+    "snippet": "A Times investigation has found that violent threats have become a new normal among public officials, reshaped private lives, cost millions in security and pushed people out of office.",
+    "byline": {
+      "original": "By Nick Corasaniti and Haiyun Jiang"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/07/us/POL-FEAR-PROMO-STILL/POL-FEAR-PROMO-STILL-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:00:39Z",
+    "section_name": "U.S.",
+    "subsection_name": "Politics",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/9bf3a530-15a4-5c74-a5ba-df1fd96018d2",
+    "web_url": "https://www.nytimes.com/2026/10/11/world/canada/inuit-inuk-indigenous-people-identity-iqaluit.html",
+    "headline": {
+      "main": "What Does It Mean to Be Inuit Now?"
+    },
+    "abstract": "In Iqaluit, the only city in Canada’s Arctic, a new generation of Inuit writers and artists is turning questions of language, land and identity into books, films and even tattoos.",
+    "snippet": "In Iqaluit, the only city in Canada’s Arctic, a new generation of Inuit writers and artists is turning questions of language, land and identity into books, films and even tattoos.",
+    "byline": {
+      "original": "By Norimitsu Onishi and Renaud Philippe"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/08/24/multimedia/00int-canada-iqaluit-promo/00int-canada-iqaluit-ktbq-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:00:31Z",
+    "section_name": "World",
+    "subsection_name": "Canada",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/ebad9ac0-0ac8-522e-8417-9713dfbff22d",
+    "web_url": "https://www.nytimes.com/2026/10/11/world/europe/russia-spy-ukraine.html",
+    "headline": {
+      "main": "A Russian Spy’s Lone Regret: ‘I Got Caught’"
+    },
+    "abstract": "Though born in Ukraine, Alexsander supports the Russian cause. He wishes he had deleted one photo from his phone.",
+    "snippet": "Though born in Ukraine, Alexsander supports the Russian cause. He wishes he had deleted one photo from his phone.",
+    "byline": {
+      "original": "By Maria Varenikova"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/09/16/world/00int-ukraine-spy-tnao/00int-ukraine-spy-tnao-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:00:28Z",
+    "section_name": "World",
+    "subsection_name": "Europe",
+    "source": "The New York Times"
+  },
+  {
+    "_id": "nyt://article/7d667644-1bdb-553d-af5c-96be7f9e49ea",
+    "web_url": "https://www.nytimes.com/2026/10/11/world/asia/china-essay-higgins-surveillance.html",
+    "headline": {
+      "main": "Where Every Tree Hides ‘an Enemy’: How I Watched China’s Paranoia Grow"
+    },
+    "abstract": "Returning to China after decades away, a correspondent finds bullet trains, dazzling skylines — and a surveillance state more paranoid and pervasive than ever.",
+    "snippet": "Returning to China after decades away, a correspondent finds bullet trains, dazzling skylines — and a surveillance state more paranoid and pervasive than ever.",
+    "byline": {
+      "original": "By Andrew Higgins and Gilles Sabrié"
+    },
+    "multimedia": {
+      "default": {
+        "url": "https://static01.nyt.com/images/2026/10/05/multimedia/00int-china-higgins-01-jqkp/00int-china-higgins-01-jqkp-articleLarge.jpg"
+      }
+    },
+    "pub_date": "2026-10-11T09:00:12Z",
+    "section_name": "World",
+    "subsection_name": "Asia Pacific",
+    "source": "The New York Times"
+  }
+]
