@@ -1,179 +1,153 @@
 # News Aggregator
 
-React + TypeScript (Vite) news aggregator UI.
+A news reader that merges **NewsAPI.org**, **The Guardian** and **The New York Times** into one newest-first feed, with search, filters and a personalized "For you" feed. Built with React 19, TypeScript and Vite; runs with a single `docker compose up`.
 
-## Environment variables
+## Features
 
-The app pulls articles from NewsAPI.org, The New York Times and The Guardian, each of which needs a free API key. Copy the example file and fill in your keys:
+| Challenge requirement        | How it is covered                                                                                                                                                                                                                                                                       |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Article search and filtering | Keyword search plus filters for date (today, past week, past month or a custom range), category and source. Filters live in the URL, so results are shareable and Back steps through every change. Hints appear when a source doesn't cover a chosen category.                          |
+| Personalized news feed       | "Your feed" lets you pick sources, categories and authors. Authors can be followed from any story's ⋯ menu or added by name, with suggestions from writers in recent stories. Preferences are saved on the device and the feed becomes "For you".                                       |
+| Mobile-responsive design     | Phone, tablet and desktop layouts: one column with a bottom-sheet filter panel on phones, a two-column grid with a side sheet on tablets, and a sticky filter column on desktop. Accessible throughout: keyboard support, visible focus, 44px touch targets and reduced-motion support. |
+
+Also: infinite scroll, partial-failure handling (if one provider is down or over its quota, the others still show), and a mock mode that serves captured real data without spending API quota.
+
+## Quick start (Docker)
+
+The only requirement is **Docker** with Compose v2 (Docker Desktop, or Docker Engine with the compose plugin). Everything else (Node, pnpm, dependencies, the build and the web server) is installed and built inside the container. The images are multi-architecture, so the same commands work on **arm64** (Apple silicon, ARM servers) and **x86_64**.
+
+### 1. Set up environment variables
+
+The app needs a free API key per provider. Create your `.env` from the example:
 
 ```bash
 cp .env.example .env
 ```
 
-| Variable           | Source                                                                  |
-| ------------------ | ----------------------------------------------------------------------- |
-| `API_KEY_NEWSAPI`  | [NewsAPI.org](https://newsapi.org/register)                             |
-| `API_KEY_NYTIMES`  | [NYT Developer](https://developer.nytimes.com/get-started)              |
-| `API_KEY_GUARDIAN` | [Guardian Open Platform](https://open-platform.theguardian.com/access/) |
-| `ENABLE_MOCK_DATA` | `true` serves built-in fixture data instead of calling the APIs         |
+Then fill it in:
 
-API keys never reach the browser. The app calls `/api/<source>/…` and a proxy adds the key: the Vite dev server in development (`vite.config.ts`) and nginx in Docker (`nginx/default.conf.template`, filled in from `.env` when the container starts).
+| Variable           | Value                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------- |
+| `API_KEY_NEWSAPI`  | Key from [NewsAPI.org](https://newsapi.org/register)                                              |
+| `API_KEY_NYTIMES`  | Key from [NYT Developer](https://developer.nytimes.com/get-started) (enable "Article Search API") |
+| `API_KEY_GUARDIAN` | Key from [Guardian Open Platform](https://open-platform.theguardian.com/access/)                  |
+| `ENABLE_MOCK_DATA` | `true` to serve built-in data instead of calling the APIs (no keys needed); `false` for live data |
 
-Use `ENABLE_MOCK_DATA=true` while working on the UI to avoid the providers' daily limits (NewsAPI's free plan allows 100 requests/day). It is read at build time, so restart `pnpm dev` or `docker compose up` after changing it.
+No keys yet? Set `ENABLE_MOCK_DATA=true` and leave the keys empty: the app runs on real stories captured from the APIs. The `.env` file must exist either way.
 
-## Run with Docker
+API keys never reach the browser. The app only calls its own `/api/<provider>/…` routes, and a proxy adds the keys server-side.
+
+### 2. Start
 
 ```bash
 docker compose up
 ```
 
-Open http://localhost:3000. Stop with `Ctrl+C` (or `docker compose down` when started with `-d`).
+Open **http://localhost:3000**. Stop with `Ctrl+C`, or run `docker compose down` if you started it with `-d`.
 
-Only Docker is required; Node and pnpm are not needed on the host.
+What happens on `up`:
 
-The image is a production build (static files served by nginx), so it has no hot reload. Every `up` rebuilds the image (`pull_policy: build`), so restart it to see code changes. For day-to-day development, use `pnpm dev` below.
+1. **Build stage** (`node:24-alpine`): Corepack installs the pinned pnpm, `pnpm install --frozen-lockfile` installs the exact locked dependencies, and `pnpm build` type-checks and builds the app. `ENABLE_MOCK_DATA` is read here from `.env`.
+2. **Serve stage** (`nginx:1.27-alpine`): nginx serves the static build and proxies `/api/*` to the providers. Keys are inserted into its config from `.env` when the container starts, so they never end up in the image.
 
-## Local development
+Every `up` rebuilds the image, so it always reflects the current code and `.env`. The first build takes a minute or two; later ones reuse Docker's cache. If port 3000 is taken, change the left side of `"3000:80"` in `docker-compose.yml`.
 
-| Tool | Version                                               |
-| ---- | ----------------------------------------------------- |
-| Node | 24 (pinned in `.nvmrc`)                               |
-| pnpm | 12.10.1 (pinned in `package.json` → `packageManager`) |
+## Development setup
 
-### 1. Install Node 24
+For day-to-day work, run Vite's dev server with hot reload:
 
-With [nvm](https://github.com/nvm-sh/nvm) (reads `.nvmrc`):
+1. **Node 24** (pinned in `.nvmrc`). With [nvm](https://github.com/nvm-sh/nvm): `nvm install && nvm use`.
+2. **pnpm** via Corepack, which installs the exact version pinned in `package.json`. pnpm 12 needs Corepack 0.36+:
+   ```bash
+   npm install -g corepack@latest
+   ```
+   ```bash
+   corepack enable
+   ```
+3. **`.env`** as described in [Set up environment variables](#1-set-up-environment-variables). `ENABLE_MOCK_DATA=true` is recommended while developing.
+4. Install and run:
+   ```bash
+   pnpm install
+   ```
+   ```bash
+   pnpm dev
+   ```
+   Open http://localhost:3000. The dev server proxies `/api/*` with your keys, like nginx does in Docker.
 
-```bash
-nvm install && nvm use
+Notes:
+
+- `ENABLE_MOCK_DATA` is read at startup; restart `pnpm dev` after changing it.
+- With live data, `pnpm dev` sends each request twice: React's StrictMode remounts components in development only. Production builds don't, but mock mode saves quota while you work.
+- pnpm 12 rejects packages published less than 24 hours ago (supply-chain protection). If an install fails with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`, pin the previous version instead of adding an exclusion.
+
+### Scripts
+
+| Script               | Purpose                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| `pnpm dev`           | Dev server with hot reload on :3000                                                  |
+| `pnpm build`         | Type-check and production build                                                      |
+| `pnpm test`          | Run all tests once                                                                   |
+| `pnpm test:watch`    | Tests in watch mode                                                                  |
+| `pnpm test:coverage` | Tests with a coverage report in `coverage/`                                          |
+| `pnpm typecheck`     | Type-check only                                                                      |
+| `pnpm lint`          | Lint with oxlint                                                                     |
+| `pnpm format`        | Format with Prettier                                                                 |
+| `pnpm mock:capture`  | Refresh the mock data from the live APIs (needs a live-data `pnpm dev`; 14 requests) |
+
+## Project structure
+
+```
+├── Dockerfile · docker-compose.yml   # Two-stage image: build with Node, serve with nginx
+├── nginx/default.conf.template       # Static hosting, API proxy with keys and rate limit
+├── scripts/                          # capture-mock-snapshot.mjs
+├── public/                           # favicon, touch icon
+└── src/
+    ├── types/          # Domain types, one concept per file: Article, ArticleQuery, Category, …
+    ├── services/news/  # Data layer, framework-agnostic; the only code that knows about providers
+    │   ├── api/        #   One folder per provider: raw types, request client, normalizer
+    │   └── mock/       #   Fake providers over test fixtures or the captured snapshot
+    ├── queries/        # TanStack Query: cache policy and the infinite feed hook
+    ├── features/       # Domain UI: articles, filters, preferences, sources
+    ├── components/     # Generic UI: buttons, chips, autocomplete, sheet, toast, …
+    ├── layout/ · pages/ · routes.tsx  # Header, the two pages and routing
+    ├── styles/         # Design tokens and global styles
+    ├── utils/ · hooks/ # Small shared helpers
+    └── test/           # Test setup and render helpers
 ```
 
-Or download Node 24 LTS from https://nodejs.org.
+## How it works
 
-### 2. Install pnpm via Corepack
+**Data layer.** Each provider has an adapter (`services/news/api/<provider>/`) that builds requests from our query, fetches raw JSON and normalizes it into one `Article` type. Raw provider types never leave their folder. `articleService` queries the relevant providers in parallel, merges the results, removes duplicates and re-applies the filters some APIs don't support (NewsAPI headlines ignore dates; no API filters by author). Adding or removing a provider only touches `services/news` and the proxy routes.
 
-Corepack installs the exact pnpm version pinned in `package.json`. pnpm 12 needs Corepack 0.36+, so update it first (Node 25+ no longer bundles Corepack at all):
+**Failures.** If one provider fails (outage, quota), the others still return results and a notice explains what's missing. The request only fails when every provider failed, and it retries once for network or 5xx errors only: retrying a 401 or 429 would just spend more quota.
 
-```bash
-npm install -g corepack@latest
-```
+**State.**
 
-```bash
-corepack enable
-```
+| State                                 | Where                                                      | Lifetime                         |
+| ------------------------------------- | ---------------------------------------------------------- | -------------------------------- |
+| Keyword and filters                   | URL, e.g. `/?q=climate&date=week&cat=science&src=guardian` | Shareable; Back steps through it |
+| Followed sources, categories, authors | `localStorage`, validated on read and synced across tabs   | Saved on the device              |
+| Dismissed failure notices             | `sessionStorage`                                           | Until the tab closes             |
+| Articles                              | TanStack Query cache                                       | Fresh for 2 min, dropped after 5 |
 
-> pnpm 12 rejects packages published less than 24h ago (`minimumReleaseAge`) as supply-chain protection. If an install fails with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`, wait or pin the previous version; don't add exclusions.
+All filters and preferences combine with AND. URL and storage values are treated as untrusted input: invalid values are dropped, never thrown on.
 
-### 3. Install and run
+**Infinite feed.** A sentinel 800px before the end of the list requests the next page from every provider that still has results. New pages are appended, so nothing already on screen moves.
 
-Make sure `.env` exists (see [Environment variables](#environment-variables)), then:
+**API keys and the proxy.** The browser only talks to `/api/*`. The Vite dev server (`vite.config.ts`) and nginx (`nginx/default.conf.template`) add the keys. nginx also rate-limits each client to 1 request/second with bursts of 20 and rejects anything but GET, so the proxy can't be used to drain the quotas.
 
-```bash
-pnpm install
-pnpm dev
-```
-
-Open http://localhost:3000.
-
-## Architecture
-
-```
-src/
-├── types/                        # Domain types, one concept per file (barrel: @/types)
-│   ├── article.ts                # Article, ArticleId
-│   ├── articleQuery.ts           # ArticleQuery
-│   ├── author.ts · category.ts · source.ts
-│   ├── date.ts                   # IsoDateTime, CalendarDate (branded strings)
-│   ├── searchResult.ts           # SearchResult, SourceError
-│   ├── feedFilters.ts            # FeedFilters, DatePreset (what the UI applies)
-│   ├── preferences.ts            # FeedPreferences, FollowedAuthor
-│   └── brand.ts                  # Brand<T, Name> helper for nominal types
-├── utils/                        # date.ts, format.ts, storage.ts (safe JSON storage), guards.ts, cx.ts
-├── config/env.ts                 # Build-time flags
-├── styles/                       # tokens.css (design tokens), global.css (base, focus, reduced motion)
-├── components/                   # Generic UI, no domain knowledge: Button, IconButton, Chip,
-│                                 #   Checkbox, Radio, SearchField, Sheet (<dialog>), Toast, Notice, …
-├── features/                     # Domain UI, one folder per concern
-│   ├── articles/                 #   ArticleCard (+ FollowMenu), ArticleFeed, FeedHeading, feed states
-│   ├── filters/                  #   FilterSidebar | FilterSheet (drafts until Apply), chips, empty states
-│   ├── preferences/              #   "Your feed": provider, pure update functions, sections
-│   └── sources/                  #   Labels and coverage rules derived from the data layer
-├── layout/                       # AppLayout (reads filters from the URL), AppHeader (per breakpoint)
-├── pages/                        # FeedPage (/), PreferencesPage (/preferences)
-├── routes.tsx · AppProviders.tsx # Route table and app-wide providers (shared with tests)
-├── test/                         # Test setup (jsdom stand-ins), render helpers
-├── queries/                      # React data access (TanStack Query); the only React-aware data code
-│   ├── queryClient.ts            # Cache policy: 2 min fresh, 5 min kept, 1 retry for transient errors
-│   ├── articleQueryKeys.ts       # Cache key factory
-│   ├── articlePages.ts           # Infinite feed: next-page params, appending pages
-│   └── useArticles.ts            # useInfiniteQuery over articleService
-└── services/news/                # Data layer: framework-agnostic, the only code that knows about providers
-    ├── index.ts                  # Composition root + public API (real or mock)
-    ├── articleService.ts         # Fan-out, merge, per-source error isolation, paging info
-    ├── articleFilters.ts         # Filters re-applied after merging (dates, categories, authors)
-    ├── articleQuery.ts           # normalizeArticleQuery: canonical form for cache keys / URLs
-    ├── articleCollection.ts      # dedupe + sort helpers
-    ├── errors.ts                 # AllSourcesFailedError, isTransientError
-    ├── api/                      # Real providers
-    │   ├── http.ts               # FetchJson contract, fetch wrapper, URL builder
-    │   ├── newsSource.ts         # NewsSource contract every provider implements
-    │   ├── sources.ts            # Registry: SourceId -> provider
-    │   ├── shared/               # Category mapping + normalization helpers
-    │   └── <provider>/           # newsApi/, guardian/, nyTimes/, each with:
-    │       ├── *.types.ts        #   raw response types (never leave this folder)
-    │       ├── *.categories.ts   #   our Category <-> provider sections
-    │       ├── *.client.ts       #   request building + fetching
-    │       ├── *.normalizer.ts   #   raw -> Article (drops incomplete items)
-    │       └── *.source.ts       #   NewsSource implementation wiring the above
-    └── mock/                     # In-memory fake providers
-        ├── mockFetchJson.ts      # Routes /api/<provider> to its handler
-        └── <provider>/           # *.fixtures.ts (raw data) + *.handler.ts (emulates the API's filters)
-```
-
-**UI:** built from the Claude Design spec (light theme, Roboto). Breakpoints: phone < 640px (row cards, bottom sheet), tablet 640–1023px (two-column stack cards, side sheet), desktop ≥ 1024px (sticky filter column). Card layout switches with CSS; the header and filter panel switch structure via `useBreakpoint`. Sheets use the native `<dialog>` (focus trap, Esc, focus return), and radios/checkboxes are native inputs.
-
-**Where state lives:**
-
-| State                                                   | Where                                                             | Why                                       |
-| ------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------- |
-| Keyword and filters                                     | URL (`/?q=climate&date=week&cat=science,technology&src=guardian`) | Shareable; Back steps through each change |
-| Followed sources, categories, authors; dismissed prompt | `localStorage` (validated on read, synced across tabs)            | "Saved on this device"                    |
-| Dismissed failure notices                               | `sessionStorage`                                                  | Hidden for the session only               |
-| Articles                                                | TanStack Query cache                                              | 2 min fresh, 5 min kept                   |
-
-URL and storage values are untrusted input: unknown values are dropped, never thrown on. All filters combine with AND, including the "For you" feed (sources, categories and authors).
-
-**Infinite feed:** an `IntersectionObserver` sentinel 800px before the end of the list requests the next page from every provider that still has results.
-
-**Data flow:** `articleService` → each relevant `NewsSource` → client fetches raw JSON → normalizer turns it into `Article`s independently per provider → the service merges, de-duplicates, re-applies filters and sorts. The UI only sees `Article` and `SearchResult`. If one provider fails (rate limit, outage), the others still return results and the failure is reported in `errors`.
-
-**Caching and the feed:** `useArticles` wraps the service in `useInfiniteQuery`. Queries are normalized first, so equivalent filters share one cache entry. Each page asks only the sources that reported more results (`sourcesWithMore`); pages are appended in load order, so loading more never reshuffles what was already shown. Partial failures come back in `errors`; the query only fails when every source failed, and it retries once for network/5xx errors only (retrying a 401/429 would just burn quota).
-
-**Mock mode** swaps only the `FetchJson` implementation. Clients and normalizers run unchanged against fake providers that return raw responses and honour keyword, category, date and paging parameters like the real APIs. The mock is lazy-loaded, so real-data builds never download it.
-
-**Adding a source:** add its id to `SourceId`, create `api/<provider>/` implementing `NewsSource`, register it in `api/sources.ts`, add a proxy route in `vite.config.ts` and `nginx/default.conf.template`, and add a fake provider in `mock/`. TypeScript flags a missing registry entry.
-
-**Removing a source:** do the reverse. Nothing outside `services/news` changes.
-
-## Scripts
-
-| Script               | Purpose                                    |
-| -------------------- | ------------------------------------------ |
-| `pnpm dev`           | Dev server on :3000                        |
-| `pnpm build`         | Type-check + production build              |
-| `pnpm lint`          | Lint with oxlint                           |
-| `pnpm format`        | Format with Prettier                       |
-| `pnpm typecheck`     | Type-check only                            |
-| `pnpm test`          | Run all tests once (Vitest)                |
-| `pnpm test:watch`    | Tests in watch mode                        |
-| `pnpm test:coverage` | Tests with a coverage report (`coverage/`) |
+**Mock mode.** `ENABLE_MOCK_DATA=true` swaps only the HTTP layer for in-memory fake providers that understand the same query parameters as the real APIs, so the clients, normalizers and service run unchanged. `pnpm dev` and Docker serve a snapshot of real stories captured with `pnpm mock:capture`, re-dated so the newest story is always "now". Tests use small hand-made fixtures instead, so their expectations stay stable. Mock code is loaded on demand and never downloaded in a live-data build.
 
 ## Testing
 
-[Vitest](https://vitest.dev) (Jest-compatible API, runs on Vite's config) with [Testing Library](https://testing-library.com) and jsdom.
+[Vitest](https://vitest.dev) (Jest-compatible) with [Testing Library](https://testing-library.com) and jsdom. Run `pnpm test`.
 
-- **Unit tests** cover pure logic: normalizers, the article service, query normalization, URL filter parsing, storage validation, formatting.
-- **Component tests** cover behaviour: the follow menu (keyboard, undo), filter drafts and Apply, the search field, the retry cool-down, infinite scroll.
-- **Integration tests** (`src/App.test.tsx`) render the whole app through the real data layer. Tests run with `ENABLE_MOCK_DATA=true`, so they use the same mock providers as development; there is no second set of mocks.
+- **Unit tests:** normalizers, the article service, URL and storage parsing, formatting.
+- **Component tests:** the follow menu, filter drafts and Apply, search, the author autocomplete, the retry cool-down, infinite scroll.
+- **Integration tests** (`src/App.test.tsx`): the whole app through the real data layer on the mock providers, covering search, filters, coverage hints, undo, history, following authors and persistence.
 
-Data-layer tests run in Node; component tests opt into jsdom with a `// @vitest-environment jsdom` comment. jsdom lacks `<dialog>` modal methods, `matchMedia` and `IntersectionObserver`; `src/test/setup.ts` provides minimal stand-ins.
+## Known limitations
+
+- **Free API plans.** NewsAPI allows 100 requests a day, is licensed for development only, returns at most 100 results per query and has no politics or world categories. NYT allows 5 requests a minute and 500 a day.
+- **Author suggestions** come from stories the app has already loaded; no provider offers a list of authors.
+- **The rate limit is per client IP.** Behind Docker Desktop or another proxy, all visitors can share one IP and therefore one allowance.
