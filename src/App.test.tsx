@@ -132,6 +132,26 @@ describe("news aggregator", () => {
     ]); // already followed, so no longer suggested
   });
 
+  it("returns from Your feed to the feed as it was left, filters included", async () => {
+    const { user, router } = renderApp("/?cat=technology", { width: 1280 });
+    await findArticle("Chip Start-Ups Race to Fill the Gap Left by Export Rules");
+
+    await user.click(screen.getByRole("link", { name: "Your feed" }));
+    await user.click(screen.getByRole("link", { name: "Back to feed" }));
+
+    expect(router.state.location.pathname).toBe("/");
+    expect(router.state.location.search).toBe("?cat=technology");
+  });
+
+  it("goes to the feed from Your feed when opened directly", async () => {
+    const { user, router } = renderApp("/preferences", { width: 1280 });
+
+    await user.click(screen.getByRole("link", { name: "Back to feed" }));
+
+    expect(router.state.location.pathname).toBe("/");
+    expect(await screen.findByRole("heading", { level: 1, name: "Top stories" })).toBeVisible();
+  });
+
   it("restores saved preferences on a new visit", async () => {
     localStorage.setItem(
       preferencesStorageKey,
