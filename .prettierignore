@@ -1,5 +1,5 @@
 pnpm-lock.yaml
 dist
 coverage
-# Written by scripts/capture-mock-snapshot.mjs
+# Written by scripts/capture-mock-snapshot.ts
 src/services/news/mock/snapshot/*.json
