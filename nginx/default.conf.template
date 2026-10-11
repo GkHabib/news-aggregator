@@ -1,32 +1,52 @@
 # Rendered at container start by the nginx image (envsubst): ${API_KEY_*} come from `.env`.
 # Keys stay server-side; the browser only calls /api/*. Mirrors the dev proxy in vite.config.ts.
+
+# The proxy spends our API quota, so cap each client: 1 request/s sustained, bursts of 20
+# (a first load needs up to ~9, scrolling ~3 per page). Lives in the http context, which
+# conf.d files are included into.
+limit_req_zone $binary_remote_addr zone=api_proxy:10m rate=1r/s;
+
 server {
   listen 80;
   root /usr/share/nginx/html;
   index index.html;
+
+  # The app only ever reads: refuse anything else before it reaches a provider.
+  if ($request_method !~ ^(GET|HEAD)$) {
+    return 405;
+  }
 
   location /assets/ {
     expires 1y;
     add_header Cache-Control "public, immutable";
   }
 
-  location /api/newsapi/ {
-    proxy_pass https://newsapi.org/v2/;
-    proxy_ssl_server_name on;
-    proxy_set_header X-Api-Key "${API_KEY_NEWSAPI}";
-  }
+  # Nested locations inherit the limit. 429 tells the app not to retry.
+  location /api/ {
+    limit_req zone=api_proxy burst=20 nodelay;
+    limit_req_status 429;
 
-  location /api/guardian/ {
-    # The original query string is appended after api-key.
-    rewrite ^/api/guardian/(.*)$ /$1?api-key=${API_KEY_GUARDIAN} break;
-    proxy_pass https://content.guardianapis.com;
-    proxy_ssl_server_name on;
-  }
+    location /api/newsapi/ {
+      proxy_pass https://newsapi.org/v2/;
+      proxy_ssl_server_name on;
+      proxy_set_header X-Api-Key "${API_KEY_NEWSAPI}";
+    }
 
-  location /api/nytimes/ {
-    rewrite ^/api/nytimes/(.*)$ /svc/search/v2/$1?api-key=${API_KEY_NYTIMES} break;
-    proxy_pass https://api.nytimes.com;
-    proxy_ssl_server_name on;
+    location /api/guardian/ {
+      # The original query string is appended after api-key.
+      rewrite ^/api/guardian/(.*)$ /$1?api-key=${API_KEY_GUARDIAN} break;
+      proxy_pass https://content.guardianapis.com;
+      proxy_ssl_server_name on;
+    }
+
+    location /api/nytimes/ {
+      rewrite ^/api/nytimes/(.*)$ /svc/search/v2/$1?api-key=${API_KEY_NYTIMES} break;
+      proxy_pass https://api.nytimes.com;
+      proxy_ssl_server_name on;
+    }
+
+    # Unknown provider paths must not fall through to the SPA.
+    return 404;
   }
 
   # SPA fallback
