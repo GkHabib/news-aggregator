@@ -1,0 +1,5 @@
+# Formats staged files (re-staging the fixes; unstaged changes are left alone),
+# then type-checks the whole project, since type errors span files.
+# Skip once with `git commit --no-verify`.
+pnpm exec lint-staged
+pnpm typecheck

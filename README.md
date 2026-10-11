@@ -76,6 +76,7 @@ For day-to-day work, run Vite's dev server with hot reload:
 
 Notes:
 
+- `pnpm install` also sets up a **pre-commit hook** (husky + lint-staged): it formats the staged files with Prettier (re-staging the fixes, leaving unstaged changes alone) and type-checks the whole project, blocking the commit on type errors. Skip it once with `git commit --no-verify`.
 - `ENABLE_MOCK_DATA` is read at startup; restart `pnpm dev` after changing it.
 - With live data, `pnpm dev` sends each request twice: React's StrictMode remounts components in development only. Production builds don't, but mock mode saves quota while you work.
 - pnpm 12 rejects packages published less than 24 hours ago (supply-chain protection). If an install fails with `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`, pin the previous version instead of adding an exclusion.
