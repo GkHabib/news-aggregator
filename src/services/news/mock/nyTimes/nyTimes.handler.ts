@@ -1,5 +1,4 @@
 import type { NyTimesDoc, NyTimesResponse } from "@/services/news/api/nyTimes/nyTimes.types";
-import { nyTimesFixtures } from "@/services/news/mock/nyTimes/nyTimes.fixtures";
 import {
   includesKeyword,
   isWithinDays,
@@ -27,25 +26,27 @@ function matchesFilterQuery(doc: NyTimesDoc, fq: string | null): boolean {
 const fromNyTimesDate = (date: string | null) =>
   date && `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`;
 
-/** Emulates `/articlesearch.json` with q, fq, begin_date, end_date and 0-based paging. */
-export const handleNyTimes: MockHandler = (_path, params): NyTimesResponse => {
-  const keyword = params.get("q");
-  const from = fromNyTimesDate(params.get("begin_date"));
-  const to = fromNyTimesDate(params.get("end_date"));
-  const page = numberParam(params, "page", 0) + 1;
+/** Emulates `/articlesearch.json` over `docs` with q, fq, begin_date, end_date and 0-based paging. */
+export const createNyTimesHandler =
+  (docs: readonly NyTimesDoc[]): MockHandler =>
+  (_path, params): NyTimesResponse => {
+    const keyword = params.get("q");
+    const from = fromNyTimesDate(params.get("begin_date"));
+    const to = fromNyTimesDate(params.get("end_date"));
+    const page = numberParam(params, "page", 0) + 1;
 
-  const matches = nyTimesFixtures.filter(
-    (doc) =>
-      matchesFilterQuery(doc, params.get("fq")) &&
-      includesKeyword(keyword, doc.headline.main, doc.abstract, doc.snippet) &&
-      isWithinDays(doc.pub_date, from, to),
-  );
+    const matches = docs.filter(
+      (doc) =>
+        matchesFilterQuery(doc, params.get("fq")) &&
+        includesKeyword(keyword, doc.headline.main, doc.abstract, doc.snippet) &&
+        isWithinDays(doc.pub_date, from, to),
+    );
 
-  return {
-    status: "OK",
-    response: {
-      docs: paginate(matches, page, pageSize),
-      metadata: { hits: matches.length, offset: (page - 1) * pageSize },
-    },
+    return {
+      status: "OK",
+      response: {
+        docs: paginate(matches, page, pageSize),
+        metadata: { hits: matches.length, offset: (page - 1) * pageSize },
+      },
+    };
   };
-};

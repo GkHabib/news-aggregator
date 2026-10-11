@@ -1,4 +1,4 @@
-import { enableMockData } from "@/config/env";
+import { enableMockData, mockDataset } from "@/config/env";
 import { httpFetchJson, type FetchJson } from "@/services/news/api/http";
 import { createNewsSources } from "@/services/news/api/sources";
 import { createArticleService } from "@/services/news/articleService";
@@ -10,8 +10,8 @@ import { createArticleService } from "@/services/news/articleService";
  */
 const fetchJson: FetchJson = enableMockData
   ? async <T>(url: string, signal?: AbortSignal) => {
-      const { mockFetchJson } = await import("@/services/news/mock/mockFetchJson");
-      return mockFetchJson<T>(url, signal);
+      const { loadMockFetchJson } = await import("@/services/news/mock/mockFetchJson");
+      return (await loadMockFetchJson(mockDataset))<T>(url, signal);
     }
   : httpFetchJson;
 
