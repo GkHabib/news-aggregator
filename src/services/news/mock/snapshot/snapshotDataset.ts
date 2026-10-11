@@ -13,18 +13,23 @@ const newsApi = newsApiSnapshot as NewsApiFixture[];
 const guardian = guardianSnapshot as GuardianResult[];
 const nyTimes = nyTimesSnapshot as NyTimesDoc[];
 
+const dayMs = 24 * 60 * 60 * 1000;
+
 /**
- * Moves every timestamp by the same amount so the newest story is "now".
- * Keeps the snapshot useful for date filters (Today, Past week) long after
- * it was captured, while preserving the spacing between stories.
+ * Moves every timestamp forward by the same whole number of days, so the newest
+ * story falls within the last 24 hours. Keeps the snapshot useful for date
+ * filters (Today, Past week) long after it was captured, while each story keeps
+ * its time of day and its spacing to the others. Whole days make the result
+ * stable: reloading gives the same timestamps (they only move on by a day once
+ * a full day has passed), and no story ever lands in the future.
  */
-export function shiftToNow(dataset: MockDataset, now = Date.now()): MockDataset {
+export function shiftToRecentDays(dataset: MockDataset, now = Date.now()): MockDataset {
   const timestamps = [
     ...dataset.newsApi.map(({ article }) => article.publishedAt),
     ...dataset.guardian.map((result) => result.webPublicationDate),
     ...dataset.nyTimes.map((doc) => doc.pub_date),
   ].map(Date.parse);
-  const offset = now - Math.max(...timestamps);
+  const offset = Math.floor((now - Math.max(...timestamps)) / dayMs) * dayMs;
   const shift = (date: string) => new Date(Date.parse(date) + offset).toISOString();
 
   return {
@@ -40,4 +45,4 @@ export function shiftToNow(dataset: MockDataset, now = Date.now()): MockDataset 
   };
 }
 
-export const snapshotDataset: MockDataset = shiftToNow({ newsApi, guardian, nyTimes });
+export const snapshotDataset: MockDataset = shiftToRecentDays({ newsApi, guardian, nyTimes });
