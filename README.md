@@ -33,7 +33,7 @@ Then fill it in:
 | `API_KEY_GUARDIAN` | Key from [Guardian Open Platform](https://open-platform.theguardian.com/access/)                  |
 | `ENABLE_MOCK_DATA` | `true` to serve built-in data instead of calling the APIs (no keys needed); `false` for live data |
 
-No keys yet? Set `ENABLE_MOCK_DATA=true` and leave the keys empty: the app runs on real stories captured from the APIs. The `.env` file must exist either way.
+The example starts in **mock mode** (`ENABLE_MOCK_DATA=true`), so `docker compose up` works straight away without any keys, serving real stories captured from the APIs. **For live data, fill in the three keys and set `ENABLE_MOCK_DATA=false`.** The `.env` file must exist either way.
 
 API keys never reach the browser. The app only calls its own `/api/<provider>/…` routes, and a proxy adds the keys server-side.
 
@@ -133,7 +133,7 @@ Notes:
 
 All filters and preferences combine with AND. URL and storage values are treated as untrusted input: invalid values are dropped, never thrown on.
 
-**Infinite feed.** A sentinel 800px before the end of the list requests the next page from every provider that still has results. New pages are appended, so nothing already on screen moves.
+**Infinite feed.** A sentinel 800px before the end of the list requests the next page from every provider that still has results. New pages are appended, so nothing already on screen moves. Author filters (and dates on NewsAPI headlines) can only apply after fetching, so when they leave the first pages empty the feed keeps loading, up to 3 pages, before showing an empty state.
 
 **API keys and the proxy.** The browser only talks to `/api/*`. The Vite dev server (`vite.config.ts`) and nginx (`nginx/default.conf.template`) add the keys. nginx also rate-limits each client to 1 request/second with bursts of 20 and rejects anything but GET, so the proxy can't be used to drain the quotas.
 
@@ -151,4 +151,5 @@ All filters and preferences combine with AND. URL and storage values are treated
 
 - **Free API plans.** NewsAPI allows 100 requests a day, is licensed for development only, returns at most 100 results per query and has no politics or world categories. NYT allows 5 requests a minute and 500 a day.
 - **Author suggestions** come from stories the app has already loaded; no provider offers a list of authors.
+- **Author names** are parsed from free-text bylines (job titles, locations and credits such as "agencies" are removed). A few outlet names that NewsAPI lists as authors, such as "WSJ", can still appear.
 - **The rate limit is per client IP.** Behind Docker Desktop or another proxy, all visitors can share one IP and therefore one allowance.

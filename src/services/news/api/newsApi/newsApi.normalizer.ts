@@ -22,7 +22,10 @@ export function normalizeNewsApiArticle(
     summary: optionalText(raw.description),
     url: raw.url,
     imageUrl: optionalText(raw.urlToImage),
-    authors: parseAuthors(raw.author),
+    authors: parseAuthors(raw.author).filter(
+      // NewsAPI often puts the outlet in the author field ("Forbes", "ABC News - Breaking News").
+      (author) => !author.name.toLowerCase().startsWith(raw.source.name.toLowerCase()),
+    ),
     category,
     publishedAt,
   };

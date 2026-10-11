@@ -49,8 +49,11 @@ server {
     return 404;
   }
 
-  # SPA fallback
+  # SPA fallback. The HTML must be revalidated on every load (a cheap 304 when
+  # unchanged): it names the hashed bundles, so a cached copy after a redeploy
+  # would keep running the previous build. Hashed /assets/ stay cached for a year.
   location / {
+    add_header Cache-Control "no-cache";
     try_files $uri /index.html;
   }
 }

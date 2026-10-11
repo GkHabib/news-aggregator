@@ -47,7 +47,7 @@ export function FeedPage() {
       ? { kind: "forYou", basis: preferenceBasis(preferences) }
       : { kind: "top" };
 
-  const isEmpty = feed.status === "success" && articles.length === 0;
+  const isEmpty = feed.status === "success" && articles.length === 0 && !feed.isSearchingFurther;
 
   return (
     <>
@@ -96,7 +96,7 @@ export function FeedPage() {
           ) : (
             <ArticleFeed
               articles={articles}
-              isLoading={feed.status === "pending"}
+              isLoading={feed.status === "pending" || feed.isSearchingFurther}
               isFetchingMore={feed.isFetchingNextPage}
               hasMore={feed.hasNextPage}
               loadMoreFailed={feed.isFetchNextPageError}
