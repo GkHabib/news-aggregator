@@ -106,6 +106,32 @@ describe("news aggregator", () => {
     expect(await screen.findByRole("heading", { level: 1, name: "Top stories" })).toBeVisible();
   });
 
+  it("suggests writers from loaded stories on Your feed, and accepts any name", async () => {
+    const { user } = renderApp("/");
+    await findArticle("Senate Hearing Turns Tense Over Election Security");
+
+    await user.click(screen.getByRole("link", { name: "Your feed" }));
+    const input = screen.getByRole("combobox", { name: "Author name" });
+
+    await user.type(input, "grace");
+    expect(screen.getAllByRole("option").map((option) => option.textContent)).toEqual([
+      "Grace Miller",
+      "Add “grace”",
+    ]);
+    await user.keyboard("{Enter}");
+    await user.type(input, "Jane Doe{Enter}");
+
+    expect(screen.getByText("Grace Miller")).toBeInTheDocument();
+    expect(screen.getByText("Followed from a story")).toBeInTheDocument();
+    expect(screen.getByText("Jane Doe")).toBeInTheDocument();
+    expect(screen.getByText("Added by name")).toBeInTheDocument();
+
+    await user.type(input, "grace");
+    expect(screen.getAllByRole("option").map((option) => option.textContent)).toEqual([
+      "Add “grace”",
+    ]); // already followed, so no longer suggested
+  });
+
   it("restores saved preferences on a new visit", async () => {
     localStorage.setItem(
       preferencesStorageKey,

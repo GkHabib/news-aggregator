@@ -1,11 +1,12 @@
-import { useId, useState, type FormEvent } from "react";
 import type { FollowedAuthor } from "@/types";
-import { Button } from "@/components/Button/Button";
+import { Autocomplete } from "@/components/Autocomplete/Autocomplete";
 import { IconButton } from "@/components/IconButton/IconButton";
 import styles from "@/features/preferences/AuthorsEditor/AuthorsEditor.module.css";
 
 interface AuthorsEditorProps {
   authors: readonly FollowedAuthor[];
+  /** Offered while typing (authors from loaded stories); any other name is accepted too. */
+  suggestions?: readonly string[];
   onAdd: (name: string) => void;
   onRemove: (author: FollowedAuthor) => void;
   /** "rows" with origin notes (phone, tablet) or compact "pills" (desktop). */
@@ -17,39 +18,31 @@ const originNote: Record<FollowedAuthor["origin"], string> = {
   name: "Added by name",
 };
 
-/** Authors can't be browsed, so they're added by name or followed from a story. */
-export function AuthorsEditor({ authors, onAdd, onRemove, layout }: AuthorsEditorProps) {
-  const [name, setName] = useState("");
-  const inputId = useId();
-
-  const submit = (event: FormEvent) => {
-    event.preventDefault();
-    if (!name.trim()) return;
-    onAdd(name);
-    setName("");
-  };
-
+/**
+ * No provider offers an author directory, so suggestions come from stories
+ * already loaded; any other typed name is accepted too.
+ */
+export function AuthorsEditor({
+  authors,
+  suggestions = [],
+  onAdd,
+  onRemove,
+  layout,
+}: AuthorsEditorProps) {
   return (
     <>
-      <form className={styles.form} onSubmit={submit}>
-        <label htmlFor={inputId} className="visually-hidden">
-          Author name
-        </label>
-        <input
-          id={inputId}
-          className={styles.input}
-          placeholder="Add an author by name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          autoComplete="off"
-        />
-        <Button type="submit" variant="primary" size={layout === "rows" ? "large" : "medium"}>
-          Add
-        </Button>
-      </form>
+      <Autocomplete
+        label="Author name"
+        placeholder="Search writers or type any name"
+        suggestions={suggestions}
+        onSubmit={onAdd}
+        createLabel={(name) => `Add “${name}”`}
+      />
 
       {authors.length === 0 ? (
-        <p className={styles.empty}>No authors yet. Use a story’s ⋯ menu to follow its writers.</p>
+        <p className={styles.empty}>
+          No authors yet. Pick a writer from recent stories, type any name, or use a story’s ⋯ menu.
+        </p>
       ) : layout === "rows" ? (
         <ul className={styles.list}>
           {authors.map((author) => (

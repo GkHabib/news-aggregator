@@ -16,6 +16,7 @@ import { PreferenceSection } from "@/features/preferences/PreferenceSection/Pref
 import { usePreferences } from "@/features/preferences/preferencesContext";
 import { sourceIds, sourceLabel } from "@/features/sources/sourceInfo";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
+import { useKnownAuthors } from "@/queries/knownAuthors";
 import styles from "@/pages/PreferencesPage/PreferencesPage.module.css";
 import { formatCategory } from "@/utils/format";
 
@@ -24,6 +25,7 @@ export function PreferencesPage() {
   const { preferences, update } = usePreferences();
   const showToast = useToast();
   const isDesktop = useBreakpoint() === "desktop";
+  const authorSuggestions = useKnownAuthors(preferences.authors.map((author) => author.name));
 
   const removeAuthor = (author: FollowedAuthor) => {
     update((current) => unfollowAuthor(current, author.name));
@@ -100,12 +102,19 @@ export function PreferencesPage() {
 
       <PreferenceSection
         title="Authors"
-        description={isDesktop ? "Add by name, or follow from any story." : undefined}
+        description={
+          isDesktop ? "Pick from writers in recent stories, or add any name." : undefined
+        }
       >
         <AuthorsEditor
           layout={isDesktop ? "pills" : "rows"}
           authors={preferences.authors}
-          onAdd={(name) => update((current) => followAuthor(current, name, "name"))}
+          suggestions={authorSuggestions}
+          onAdd={(name) => {
+            // A picked suggestion is a writer from a loaded story; anything else was typed.
+            const origin = authorSuggestions.includes(name) ? "story" : "name";
+            update((current) => followAuthor(current, name, origin));
+          }}
           onRemove={removeAuthor}
         />
       </PreferenceSection>
