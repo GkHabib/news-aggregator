@@ -94,6 +94,7 @@ Notes:
 | `pnpm lint`          | Lint with oxlint                                                                     |
 | `pnpm format`        | Format with Prettier                                                                 |
 | `pnpm mock:capture`  | Refresh the mock data from the live APIs (needs a live-data `pnpm dev`; 14 requests) |
+| `pnpm release`       | Cut a release: changelog, tag and GitHub release (see [Releasing](#releasing))       |
 
 ## Project structure
 
@@ -146,6 +147,16 @@ All filters and preferences combine with AND. URL and storage values are treated
 - **Unit tests:** normalizers, the article service, URL and storage parsing, formatting.
 - **Component tests:** the follow menu, filter drafts and Apply, search, the author autocomplete, the retry cool-down, infinite scroll.
 - **Integration tests** (`src/App.test.tsx`): the whole app through the real data layer on the mock providers, covering search, filters, coverage hints, undo, history, following authors and persistence.
+
+## Releasing
+
+Releases are cut from `master` with [release-it](https://github.com/release-it/release-it). It runs the type-check, lint and tests, bumps the version, writes `CHANGELOG.md` from the [Conventional Commits](https://www.conventionalcommits.org) history (`feat:`, `fix:`, …), then commits, tags `vX.Y.Z`, pushes and publishes a GitHub release. Nothing is published to npm.
+
+```bash
+GITHUB_TOKEN=$(gh auth token) pnpm release
+```
+
+The next version is recommended from the commits; pass one explicitly to override it, e.g. `pnpm release 1.1.0`. Add `--dry-run` to preview everything without changing anything.
 
 ## Known limitations
 
