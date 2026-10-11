@@ -1,19 +1,8 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import { AppLayout } from "@/layout/AppLayout/AppLayout";
-import { FeedPage } from "@/pages/FeedPage/FeedPage";
-import { PreferencesPage } from "@/pages/PreferencesPage/PreferencesPage";
+import { routes } from "@/routes";
 
-const router = createBrowserRouter([
-  {
-    element: <AppLayout />,
-    children: [
-      { index: true, element: <FeedPage /> },
-      { path: "preferences", element: <PreferencesPage /> },
-      { path: "*", element: <Navigate to="/" replace /> },
-    ],
-  },
-]);
+const router = createBrowserRouter(routes);
 
 export function App() {
   return <RouterProvider router={router} />;

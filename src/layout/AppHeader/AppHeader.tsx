@@ -7,6 +7,7 @@ import { SearchField } from "@/components/SearchField/SearchField";
 import { FiltersButton } from "@/features/filters/FiltersButton/FiltersButton";
 import type { Breakpoint } from "@/hooks/useMediaQuery";
 import styles from "@/layout/AppHeader/AppHeader.module.css";
+import { BackToFeedLink } from "@/layout/BackToFeedLink/BackToFeedLink";
 import { cx } from "@/utils/cx";
 
 interface AppHeaderProps {
@@ -108,12 +109,12 @@ function PhoneHeader({
     return (
       <header className={styles.header}>
         <div className={cx(styles.bar, styles.backBar)}>
-          <Link to="/" className={styles.backLink}>
+          <BackToFeedLink className={styles.backLink}>
             <span className={styles.backIcon}>
               <Icon name="back" />
             </span>
             Back to feed
-          </Link>
+          </BackToFeedLink>
         </div>
       </header>
     );

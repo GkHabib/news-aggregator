@@ -1,0 +1,93 @@
+.root {
+  position: relative;
+  max-width: 440px;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.input:hover {
+  border-color: var(--muted);
+}
+
+.input:focus-visible {
+  border: 2px solid var(--accent);
+  padding: 0 15px;
+  outline: none;
+}
+
+/* Same surface as the card follow menu. */
+.listbox {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  left: 0;
+  z-index: 10;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow-3);
+  list-style: none;
+  animation: appear 120ms ease-out;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--target);
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.option:hover,
+.option[aria-selected="true"] {
+  background: var(--surface-2);
+}
+
+.match {
+  font-weight: 700;
+}
+
+.create {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Separates the free-text option from the suggestions above it. */
+.option + .create {
+  margin-top: 4px;
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 10px 10px;
+}
+
+@media (min-width: 1024px) {
+  .input {
+    min-height: var(--target);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}

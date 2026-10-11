@@ -5,6 +5,7 @@ import { Button } from "@/components/Button/Button";
 import { buttonClassName } from "@/components/Button/buttonClassName";
 import { StateMessage } from "@/components/StateMessage/StateMessage";
 import { ArticleCard } from "@/features/articles/ArticleCard/ArticleCard";
+import { LoadMoreTrigger } from "@/features/articles/ArticleFeed/LoadMoreTrigger";
 import { SkeletonCard } from "@/features/articles/SkeletonCard/SkeletonCard";
 import styles from "@/features/articles/ArticleFeed/ArticleFeed.module.css";
 
@@ -14,7 +15,8 @@ interface ArticleFeedProps {
   isFetchingMore: boolean;
   hasMore: boolean;
   loadMoreFailed: boolean;
-  onRetryLoadMore: () => void;
+  /** Requests the next page: on scroll (infinite feed) and from the retry button. */
+  onLoadMore: () => void;
 }
 
 const scrollToTop = () => {
@@ -29,7 +31,7 @@ export function ArticleFeed({
   isFetchingMore,
   hasMore,
   loadMoreFailed,
-  onRetryLoadMore,
+  onLoadMore,
 }: ArticleFeedProps) {
   const headingId = useId();
 
@@ -64,12 +66,16 @@ export function ArticleFeed({
           ))}
       </ul>
 
+      {!isLoading && hasMore && !isFetchingMore && !loadMoreFailed && (
+        <LoadMoreTrigger onLoadMore={onLoadMore} />
+      )}
+
       <div aria-live="polite">
         {isFetchingMore && <p className={styles.status}>Loading more stories…</p>}
         {loadMoreFailed && (
           <p className={styles.loadMoreError}>
             Couldn’t load more.
-            <Button variant="text" onClick={onRetryLoadMore}>
+            <Button variant="text" onClick={onLoadMore}>
               Try again
             </Button>
           </p>

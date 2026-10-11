@@ -1,5 +1,7 @@
 import { categories, type FollowedAuthor } from "@/types";
 import { Button } from "@/components/Button/Button";
+import { buttonClassName } from "@/components/Button/buttonClassName";
+import { Icon } from "@/components/Icon/Icon";
 import { Checkbox } from "@/components/Checkbox/Checkbox";
 import { ChoiceChip } from "@/components/Chip/ChoiceChip";
 import { useToast } from "@/components/Toast/toastContext";
@@ -16,14 +18,19 @@ import { PreferenceSection } from "@/features/preferences/PreferenceSection/Pref
 import { usePreferences } from "@/features/preferences/preferencesContext";
 import { sourceIds, sourceLabel } from "@/features/sources/sourceInfo";
 import { useBreakpoint } from "@/hooks/useMediaQuery";
+import { BackToFeedLink } from "@/layout/BackToFeedLink/BackToFeedLink";
+import { useKnownAuthors } from "@/queries/knownAuthors";
 import styles from "@/pages/PreferencesPage/PreferencesPage.module.css";
+import { cx } from "@/utils/cx";
 import { formatCategory } from "@/utils/format";
 
 /** "Your feed": every change applies at once, so there is no Save button. */
 export function PreferencesPage() {
   const { preferences, update } = usePreferences();
   const showToast = useToast();
-  const isDesktop = useBreakpoint() === "desktop";
+  const breakpoint = useBreakpoint();
+  const isDesktop = breakpoint === "desktop";
+  const authorSuggestions = useKnownAuthors(preferences.authors.map((author) => author.name));
 
   const removeAuthor = (author: FollowedAuthor) => {
     update((current) => unfollowAuthor(current, author.name));
@@ -51,6 +58,15 @@ export function PreferencesPage() {
   return (
     <main className={styles.page}>
       <title>Your feed · News Aggregator</title>
+      {/* Phones have "Back to feed" in the header instead. */}
+      {breakpoint !== "phone" && (
+        <BackToFeedLink
+          className={cx(buttonClassName({ variant: "text", icon: "back" }), styles.back)}
+        >
+          <Icon name="back" size={18} />
+          Back to feed
+        </BackToFeedLink>
+      )}
       <div className={styles.intro}>
         <h1 className={styles.title}>Your feed</h1>
         <p className={styles.subtitle}>Saved on this device. Changes apply right away.</p>
@@ -100,12 +116,19 @@ export function PreferencesPage() {
 
       <PreferenceSection
         title="Authors"
-        description={isDesktop ? "Add by name, or follow from any story." : undefined}
+        description={
+          isDesktop ? "Pick from writers in recent stories, or add any name." : undefined
+        }
       >
         <AuthorsEditor
           layout={isDesktop ? "pills" : "rows"}
           authors={preferences.authors}
-          onAdd={(name) => update((current) => followAuthor(current, name, "name"))}
+          suggestions={authorSuggestions}
+          onAdd={(name) => {
+            // A picked suggestion is a writer from a loaded story; anything else was typed.
+            const origin = authorSuggestions.includes(name) ? "story" : "name";
+            update((current) => followAuthor(current, name, origin));
+          }}
           onRemove={removeAuthor}
         />
       </PreferenceSection>
