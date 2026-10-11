@@ -137,7 +137,7 @@ All filters and preferences combine with AND. URL and storage values are treated
 
 **API keys and the proxy.** The browser only talks to `/api/*`. The Vite dev server (`vite.config.ts`) and nginx (`nginx/default.conf.template`) add the keys. nginx also rate-limits each client to 1 request/second with bursts of 20 and rejects anything but GET, so the proxy can't be used to drain the quotas.
 
-**Mock mode.** `ENABLE_MOCK_DATA=true` swaps only the HTTP layer for in-memory fake providers that understand the same query parameters as the real APIs, so the clients, normalizers and service run unchanged. `pnpm dev` and Docker serve a snapshot of real stories captured with `pnpm mock:capture`, re-dated so the newest story is always "now". Tests use small hand-made fixtures instead, so their expectations stay stable. Mock code is loaded on demand and never downloaded in a live-data build.
+**Mock mode.** `ENABLE_MOCK_DATA=true` swaps only the HTTP layer for in-memory fake providers that understand the same query parameters as the real APIs, so the clients, normalizers and service run unchanged. `pnpm dev` and Docker serve a snapshot of real stories captured with `pnpm mock:capture`, moved forward by whole days so the newest story is from the last 24 hours (date filters keep working, and timestamps stay the same across reloads). Tests use small hand-made fixtures instead, so their expectations stay stable. Mock code is loaded on demand and never downloaded in a live-data build.
 
 ## Testing
 
