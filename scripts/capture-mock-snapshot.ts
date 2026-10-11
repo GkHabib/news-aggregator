@@ -6,25 +6,48 @@
 //
 // Budget: 14 requests (7 NewsAPI, 3 Guardian, 4 NYT). Responses are trimmed to
 // the fields our raw types use and written to src/services/news/mock/snapshot/.
+// Typed against the app's own raw provider types, so they can't drift apart.
+// Node 24 runs this TypeScript file directly (type stripping), no build step.
 
 import { mkdir, writeFile } from "node:fs/promises";
+import type {
+  GuardianResponse,
+  GuardianResult,
+} from "../src/services/news/api/guardian/guardian.types.ts";
+import type {
+  NewsApiArticle,
+  NewsApiCategory,
+  NewsApiResponse,
+} from "../src/services/news/api/newsApi/newsApi.types.ts";
+import type {
+  NyTimesDoc,
+  NyTimesResponse,
+} from "../src/services/news/api/nyTimes/nyTimes.types.ts";
+
+/** Same shape as the mock's NewsApiFixture: NewsAPI responses carry no category. */
+interface NewsApiSnapshotItem {
+  category: NewsApiCategory;
+  article: NewsApiArticle;
+}
 
 const base = process.argv[2] ?? "http://localhost:3000";
 const outDir = new URL("../src/services/news/mock/snapshot/", import.meta.url);
 let requestCount = 0;
 
-async function get(path) {
+async function get<T>(path: string): Promise<T> {
   requestCount++;
   const response = await fetch(new URL(path, base));
   if (!response.ok) throw new Error(`${response.status} for ${path}`);
-  return response.json();
+  return (await response.json()) as T;
 }
 
-const uniqueBy = (items, key) => [...new Map(items.map((item) => [key(item), item])).values()];
+const uniqueBy = <T>(items: readonly T[], key: (item: T) => string): T[] => [
+  ...new Map(items.map((item) => [key(item), item] as const)).values(),
+];
 
 // NewsAPI responses carry no category, so ask per category and remember it.
-async function captureNewsApi() {
-  const categories = [
+async function captureNewsApi(): Promise<NewsApiSnapshotItem[]> {
+  const categories: NewsApiCategory[] = [
     "business",
     "entertainment",
     "general",
@@ -33,9 +56,9 @@ async function captureNewsApi() {
     "sports",
     "technology",
   ];
-  const fixtures = [];
+  const fixtures: NewsApiSnapshotItem[] = [];
   for (const category of categories) {
-    const { articles } = await get(
+    const { articles } = await get<NewsApiResponse>(
       `/api/newsapi/top-headlines?country=us&category=${category}&pageSize=20`,
     );
     for (const article of articles) {
@@ -53,19 +76,19 @@ async function captureNewsApi() {
       });
     }
   }
-  return uniqueBy(fixtures, (fixture) => fixture.article.url);
+  return uniqueBy(fixtures, (fixture) => fixture.article.url ?? "");
 }
 
-async function captureGuardian() {
+async function captureGuardian(): Promise<GuardianResult[]> {
   const fields = "show-fields=trailText,byline,thumbnail&order-by=newest";
   const queries = [
     `page-size=50&${fields}`,
     `page-size=30&section=politics|world|science&${fields}`,
     `page-size=30&section=technology|business|sport|culture|film|music&${fields}`,
   ];
-  const results = [];
+  const results: GuardianResult[] = [];
   for (const query of queries) {
-    const { response } = await get(`/api/guardian/search?${query}`);
+    const { response } = await get<GuardianResponse>(`/api/guardian/search?${query}`);
     results.push(
       ...response.results.map((result) => ({
         id: result.id,
@@ -82,18 +105,18 @@ async function captureGuardian() {
   return uniqueBy(results, (result) => result.id);
 }
 
-async function captureNyTimes() {
+async function captureNyTimes(): Promise<NyTimesDoc[]> {
   const queries = [
     "sort=newest&page=0",
     "sort=newest&page=1",
     `sort=newest&page=0&fq=${encodeURIComponent('section.name:("Technology" "Science" "Health" "Business")')}`,
     `sort=newest&page=0&fq=${encodeURIComponent('subsection.name:("Politics") OR section.name:("World")')}`,
   ];
-  const docs = [];
+  const docs: NyTimesDoc[] = [];
   for (const query of queries) {
-    const { response } = await get(`/api/nytimes/articlesearch.json?${query}`);
+    const { response } = await get<NyTimesResponse>(`/api/nytimes/articlesearch.json?${query}`);
     docs.push(
-      ...(response.docs ?? []).map((doc) => ({
+      ...(response.docs ?? []).map((doc): NyTimesDoc => ({
         _id: doc._id,
         web_url: doc.web_url,
         headline: { main: doc.headline?.main ?? "" },

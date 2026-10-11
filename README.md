@@ -99,7 +99,7 @@ Notes:
 ```
 ├── Dockerfile · docker-compose.yml   # Two-stage image: build with Node, serve with nginx
 ├── nginx/default.conf.template       # Static hosting, API proxy with keys and rate limit
-├── scripts/                          # capture-mock-snapshot.mjs
+├── scripts/                          # capture-mock-snapshot.ts (pnpm mock:capture)
 ├── public/                           # favicon, touch icon
 └── src/
     ├── types/          # Domain types, one concept per file: Article, ArticleQuery, Category, …
