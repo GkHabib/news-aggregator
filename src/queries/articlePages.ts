@@ -13,6 +13,8 @@ export interface ArticlePageParam {
 export interface ArticleFeed {
   readonly articles: readonly Article[];
   readonly errors: readonly SourceError[];
+  /** How many pages have been loaded so far. */
+  readonly pageCount: number;
 }
 
 export const firstPageParam = (sources?: readonly SourceId[]): ArticlePageParam => ({
@@ -42,5 +44,6 @@ export function mergePages(data: InfiniteData<SearchResult, ArticlePageParam>): 
   return {
     articles: dedupeByUrl(data.pages.flatMap((page) => page.articles)),
     errors: [...errorsBySource.values()],
+    pageCount: data.pages.length,
   };
 }
