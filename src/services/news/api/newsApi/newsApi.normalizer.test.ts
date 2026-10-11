@@ -28,6 +28,17 @@ describe("normalizeNewsApiArticle", () => {
     });
   });
 
+  it("drops an outlet named as the author", () => {
+    const outletAsAuthor = { ...raw, source: { id: null, name: "ABC News" } };
+    expect(
+      normalizeNewsApiArticle({ ...outletAsAuthor, author: "ABC News - Breaking News" }, "general")
+        ?.authors,
+    ).toEqual([]);
+    expect(
+      normalizeNewsApiArticle({ ...outletAsAuthor, author: "Jane Doe" }, "general")?.authors,
+    ).toEqual([{ name: "Jane Doe" }]);
+  });
+
   it("drops removed and incomplete articles", () => {
     expect(normalizeNewsApiArticle({ ...raw, title: "[Removed]" }, "general")).toBeUndefined();
     expect(normalizeNewsApiArticle({ ...raw, url: null }, "general")).toBeUndefined();
