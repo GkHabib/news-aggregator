@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Outlet, ScrollRestoration, useLocation, useNavigate } from "react-router";
 import type { FeedFilters } from "@/types";
 import { useToast } from "@/components/Toast/toastContext";
@@ -26,11 +26,20 @@ export function AppLayout() {
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
   const [phoneSearchOpen, setPhoneSearchOpen] = useState(false);
 
+  // The location as of the latest render. Callbacks that run later (a toast's
+  // Undo) must compare against this, not the value from when they were created.
+  const currentLocation = useRef({ pathname, search: locationSearch });
+  useLayoutEffect(() => {
+    currentLocation.current = { pathname, search: locationSearch };
+  });
+
   /** Shows the feed for `next`; filters only apply on the feed, so this always goes to "/". */
   const showFeed = (next: FeedFilters) => {
     const search = serializeFeedFilters(next).toString();
     const target = search ? `?${search}` : "";
-    if (pathname === "/" && target === locationSearch) return;
+    const current = currentLocation.current;
+    // Already showing exactly this: don't add a duplicate history entry.
+    if (current.pathname === "/" && current.search === target) return;
     navigate({ pathname: "/", search: target });
   };
 

@@ -76,6 +76,20 @@ describe("news aggregator", () => {
     expect(router.state.location.search).toBe("?cat=technology%2Cpolitics");
   });
 
+  it("undoes a removed filter when the URL was written by the app itself", async () => {
+    // Regression: Undo compared against the URL from before the removal, saw no
+    // change and skipped navigating. Hand-typed URLs hid it (`,` vs `%2C`).
+    const { user, router } = renderApp("/?cat=technology");
+    await findArticle("Chip Start-Ups Race to Fill the Gap Left by Export Rules");
+
+    await user.click(screen.getByRole("button", { name: "Remove filter: Technology" }));
+    expect(router.state.location.search).toBe("");
+
+    await user.click(await screen.findByRole("button", { name: "Undo" }));
+    expect(router.state.location.search).toBe("?cat=technology");
+    expect(screen.getByRole("button", { name: "Remove filter: Technology" })).toBeInTheDocument();
+  });
+
   it("makes every filter change a history entry", async () => {
     const { user, router } = renderApp("/");
 
