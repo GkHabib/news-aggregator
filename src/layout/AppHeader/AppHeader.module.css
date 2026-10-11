@@ -16,6 +16,10 @@
 }
 
 .brand {
+  /* A full 44px touch target, like the icon buttons beside it. */
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target);
   margin-right: auto;
   font-weight: 700;
   font-size: 19px;
